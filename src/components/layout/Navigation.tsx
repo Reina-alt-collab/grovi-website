@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 
 const navItems = [
   { label: 'Sobre Nosotros', href: '#sobre-nosotros' },
@@ -68,20 +69,16 @@ export default function Navigation() {
           }}
         >
           {/* Logo */}
-          <div>
-            <img
-              src="/grovi-logo-removebg.png"
-              alt="Logo de Grovi"
-              style={{
-                height: '35px',
-                cursor: 'pointer',
-                transition: 'transform 0.3s ease',
-              }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-            />
-          </div>
+<div>
+  {/* Logo de Grovi */}
+  <Image 
+    src="/grovi-logo-removebg.png" 
+    alt="Logo de Grovi" 
+    width={100}
+    height={33}
+    priority
+  />
+</div>
 
           {/* Desktop Menu */}
           {!isMobile && (

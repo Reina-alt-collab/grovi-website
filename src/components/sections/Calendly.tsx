@@ -4,7 +4,14 @@ import styles from './Calendly.module.css'
 
 declare global {
   interface Window {
-    Calendly: any;
+    Calendly: {
+      initInlineWidget: (options: {
+        url: string;
+        parentElement: Element | null;
+        prefill: Record<string, unknown>;
+        utm: Record<string, unknown>;
+      }) => void;
+    };
   }
 }
 
@@ -70,13 +77,6 @@ export default function CalendlySection() {
       }, 100)
     }
   }, [calendlyLoaded, calendlyUrl])
-
-  const handleScroll = (targetId: string) => {
-    const element = document.querySelector(targetId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
 
   return (
     <section id="agendar" className={styles.calendly}>
