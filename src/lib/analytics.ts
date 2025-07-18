@@ -1,5 +1,8 @@
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
 
+// Debug: Log the GA_TRACKING_ID at module level
+console.log('📊 Analytics module loaded - GA_TRACKING_ID:', GA_TRACKING_ID)
+
 // Declaración global para gtag
 declare global {
   interface Window {
