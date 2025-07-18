@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
   async headers() {
     return [
       {
@@ -31,10 +32,7 @@ const nextConfig = {
     domains: ['assets.calendly.com'],
     unoptimized: false,
   },
-  // Configuración para análisis
-  experimental: {
-    optimizeCss: true,
-  }
+  // REMOVIDO: experimental optimizeCss que causaba el error de 'critters'
 }
 
-module.exports = nextConfig
+export default nextConfig
