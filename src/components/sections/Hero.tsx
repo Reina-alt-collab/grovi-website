@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
+import { trackButtonClick, trackScroll } from '@/lib/analytics'
 import styles from './Hero.module.css'
 
 export default function Hero() {
@@ -98,7 +99,20 @@ export default function Hero() {
     const element = document.querySelector(targetId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      
+      // Track scroll event
+      trackScroll(targetId.replace('#', ''))
     }
+  }
+
+  const handleConnectNowClick = () => {
+    trackButtonClick('Conectar Ahora', 'Hero')
+    handleScroll('#agendar')
+  }
+
+  const handleExploreNetworkClick = () => {
+    trackButtonClick('Explorar Red', 'Hero')
+    handleScroll('#sobre-nosotros')
   }
 
   return (
@@ -166,14 +180,14 @@ export default function Hero() {
           <div className={`${styles.buttons} ${mounted ? styles.fadeInLeft : ''}`}>
             <button 
               className={styles.primaryButton}
-              onClick={() => handleScroll('#agendar')}
+              onClick={handleConnectNowClick}
             >
               <span className={styles.buttonText}>Conectar Ahora</span>
               <span className={styles.buttonIcon}>🚀</span>
             </button>
             <button 
               className={styles.secondaryButton}
-              onClick={() => handleScroll('#sobre-nosotros')}
+              onClick={handleExploreNetworkClick}
             >
               <span className={styles.buttonText}>Explorar Red</span>
               <span className={styles.buttonIcon}>🔗</span>
