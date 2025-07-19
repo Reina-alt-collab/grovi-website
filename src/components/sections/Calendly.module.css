@@ -638,7 +638,7 @@
   }
 }
 
-/* Reduced motion */
+/* Reduced motion - CSS Modules compatible */
 @media (prefers-reduced-motion: reduce) {
   .mobileCalendlyButton:hover,
   .retryButton:hover,
@@ -650,8 +650,9 @@
     animation: none;
   }
   
-  /* Fixed for CSS Modules */
-  :global(*) {
+  .calendlyWidget,
+  .mobileCalendlyCard,
+  .mobileCalendlyButton {
     transition: none !important;
     animation: none !important;
   }
