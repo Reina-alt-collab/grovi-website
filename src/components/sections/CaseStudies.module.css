@@ -838,3 +838,67 @@
     text-align: center;
   }
 }
+/* Missing animation classes */
+.fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.slideUp {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.fadeInUp {
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Missing mobile card interaction */
+.active {
+  border-color: #F07255;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+.mobileCard {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobileCard:focus {
+  outline: 2px solid #F07255;
+  outline-offset: 2px;
+}
+
+/* Missing expand indicator */
+.expandIndicator {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #F07255;
+  min-width: 24px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+/* Missing tap hint */
+.tapHint {
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(36, 36, 36, 0.5);
+  margin-top: 0.5rem;
+  font-style: italic;
+  opacity: 0.7;
+}
