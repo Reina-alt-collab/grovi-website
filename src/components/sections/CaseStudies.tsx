@@ -1,18 +1,32 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import styles from './CaseStudies.module.css'
 
 // Import analytics for tracking
 import { trackButtonClick, trackScroll } from '../../lib/analytics'
 
+// 🔧 FIX 3: TypeScript Interface para type safety
+interface CaseStudy {
+  number: string
+  title: string
+  description: string
+  detailedDescription: string
+  industry: string
+  timeline: string
+  challenges: string[]
+  solutions: string[]
+  featured: boolean
+  icon: string
+}
+
 export default function CaseStudies() {
-  const [mounted, setMounted] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [activeCard, setActiveCard] = useState<number | null>(null)
+  // 🔧 FIX 2: Intersection Observer state
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
-    
+
     // Detect mobile device
     const checkMobile = () => {
       const mobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
@@ -27,7 +41,26 @@ export default function CaseStudies() {
     }
   }, [])
 
-  const handleScroll = (targetId: string) => {
+  // 🔧 FIX 2: Intersection Observer para animaciones optimizadas
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    )
+
+    const section = document.querySelector('#casos-de-exito')
+    if (section) observer.observe(section)
+    
+    return () => observer.disconnect()
+  }, [])
+
+  // 🔧 FIX 1: useCallback para optimizar handlers
+  const handleScroll = useCallback((targetId: string) => {
     const element = document.querySelector(targetId)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -35,20 +68,21 @@ export default function CaseStudies() {
       // Track scroll event
       trackScroll(targetId.replace('#', ''))
     }
-  }
+  }, [])
 
-  const handleCtaClick = () => {
+  const handleCtaClick = useCallback(() => {
     trackButtonClick('Descubre Cómo', 'Casos de Éxito')
     handleScroll('#agendar')
-  }
+  }, [handleScroll])
 
-  const handleCardInteraction = (index: number) => {
+  const handleCardInteraction = useCallback((index: number) => {
     if (isMobile) {
       setActiveCard(activeCard === index ? null : index)
     }
-  }
+  }, [isMobile, activeCard])
 
-  const caseStudies = [
+  // 🔧 FIX 1: useMemo para optimizar data y evitar re-renders
+  const caseStudies: CaseStudy[] = useMemo(() => [
     {
       number: '40%',
       title: 'Incremento en Ingresos',
@@ -62,7 +96,7 @@ export default function CaseStudies() {
       icon: '🚀'
     },
     {
-      number: '150%',
+      number: '100%',
       title: 'Crecimiento en Leads',
       description: 'Implementamos una estrategia de marketing digital integral que triplicó la generación de leads cualificados para una empresa de servicios profesionales.',
       detailedDescription: 'Creamos una estrategia omnicanal que incluía SEO, content marketing, social media y PPC, resultando en un crecimiento sostenible de leads cualificados.',
@@ -85,12 +119,13 @@ export default function CaseStudies() {
       featured: false,
       icon: '⚙️'
     }
-  ]
+  ], [])
 
   return (
     <section id="casos-de-exito" className={styles.caseStudies}>
       <div className={styles.container}>
-        <div className={`${styles.header} ${mounted ? styles.fadeIn : ''}`}>
+        {/* 🔧 FIX 2: Usar isVisible en lugar de mounted para animaciones */}
+        <div className={`${styles.header} ${isVisible ? styles.fadeIn : ''}`}>
           <h2 className={styles.title}>Casos de Éxito Destacados</h2>
           <p className={styles.subtitle}>
             Descubre cómo ayudamos a nuestros clientes a alcanzar resultados extraordinarios
@@ -104,7 +139,7 @@ export default function CaseStudies() {
               className={`
                 ${styles.studyCard} 
                 ${study.featured ? styles.featured : ''} 
-                ${mounted ? styles.slideUp : ''}
+                ${isVisible ? styles.slideUp : ''}
                 ${activeCard === index ? styles.active : ''}
                 ${isMobile ? styles.mobileCard : ''}
               `}
@@ -196,26 +231,8 @@ export default function CaseStudies() {
           ))}
         </div>
 
-        {/* Success Metrics Summary */}
-        <div className={`${styles.metricsSection} ${mounted ? styles.fadeInUp : ''}`}>
-          <h3 className={styles.metricsTitle}>Resultados que Hablan por Sí Solos</h3>
-          <div className={styles.metricsGrid}>
-            <div className={styles.metric}>
-              <div className={styles.metricNumber}>95%</div>
-              <div className={styles.metricLabel}>Clientes Satisfechos</div>
-            </div>
-            <div className={styles.metric}>
-              <div className={styles.metricNumber}>50+</div>
-              <div className={styles.metricLabel}>Proyectos Completados</div>
-            </div>
-            <div className={styles.metric}>
-              <div className={styles.metricNumber}>200%</div>
-              <div className={styles.metricLabel}>ROI Promedio</div>
-            </div>
-          </div>
-        </div>
 
-        <div className={`${styles.ctaSection} ${mounted ? styles.fadeInUp : ''}`}>
+        <div className={`${styles.ctaSection} ${isVisible ? styles.fadeInUp : ''}`}>
           <h3 className={styles.ctaTitle}>¿Listo para ser nuestro próximo caso de éxito?</h3>
           <p className={styles.ctaText}>
             Conversemos sobre cómo podemos impulsar el crecimiento de tu negocio con estrategias probadas.

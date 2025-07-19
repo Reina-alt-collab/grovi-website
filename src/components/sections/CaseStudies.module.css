@@ -1,13 +1,38 @@
+/* =====================================================
+   CASE STUDIES - COMPATIBLE CON TSX MEJORADO
+   Mantiene tu diseño + Agrega funcionalidad mobile
+   ===================================================== */
+
 .caseStudies {
-  background: linear-gradient(135deg, #D9A6A1 0%, #D6CDBF 100%);
-  padding: 6rem 0;
+  padding: 5rem 0;
+  background: var(--gradient-bg);
   position: relative;
+  overflow: hidden;
+}
+
+.caseStudies::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 80%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(240, 114, 85, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  animation: float 8s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(3deg); }
 }
 
 .container {
-  max-width: 1200px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 2rem;
+  position: relative;
+  z-index: 2;
 }
 
 .header {
@@ -17,16 +42,19 @@
 }
 
 .title {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 1rem;
-  color: #242424;
+  margin-bottom: 1.5rem;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.2;
 }
 
 .subtitle {
-  font-size: 1.1rem;
-  color: #242424;
-  opacity: 0.7;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
@@ -37,137 +65,415 @@
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   margin-bottom: 4rem;
+  align-items: start;
 }
 
 .studyCard {
-  background: white;
-  border-radius: 20px;
+  background: var(--bg-white);
+  border-radius: var(--border-radius-large);
   padding: 2.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  position: relative;
-  transition: all 0.3s ease;
+  box-shadow: var(--shadow-medium);
+  transition: all 0.4s ease;
   opacity: 0;
   transform: translateY(30px);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(217, 166, 161, 0.1);
+  cursor: default;
+}
+
+.studyCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.studyCard:hover::before {
+  transform: scaleX(1);
 }
 
 .studyCard:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-large);
+}
+
+/* 🔧 NUEVO: Mobile card styles */
+.mobileCard {
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobileCard:focus {
+  outline: 2px solid var(--primary-orange);
+  outline-offset: 2px;
+}
+
+.active {
+  border-color: var(--primary-orange);
+  box-shadow: var(--shadow-large);
 }
 
 .featured {
-  border: 3px solid #F07255;
-  transform: scale(1.05);
-  z-index: 2;
+  background: linear-gradient(135deg, var(--bg-white) 0%, rgba(240, 114, 85, 0.02) 100%);
+  border: 2px solid rgba(240, 114, 85, 0.2);
+  transform: scale(1.02);
 }
 
-.featured:hover {
-  transform: scale(1.05) translateY(-10px);
+.featured::before {
+  height: 6px;
+  background: var(--gradient-secondary);
+}
+
+/* 🔧 NUEVO: Card Header */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+/* 🔧 NUEVO: Study Icon */
+.studyIcon {
+  font-size: 2.5rem;
+  line-height: 1;
 }
 
 .studyNumber {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 700;
-  color: #F07255;
-  margin-bottom: 1rem;
+  color: var(--primary-orange);
   line-height: 1;
+  text-shadow: 0 2px 4px rgba(240, 114, 85, 0.2);
+}
+
+.featured .studyNumber {
+  font-size: 4rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .studyTitle {
   font-size: 1.5rem;
   font-weight: 600;
+  color: var(--text-primary);
   margin-bottom: 1rem;
-  color: #242424;
+  line-height: 1.3;
+}
+
+.featured .studyTitle {
+  font-size: 1.75rem;
+  color: var(--primary-orange);
 }
 
 .studyDescription {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
   font-size: 1rem;
-  color: #242424;
-  opacity: 0.8;
-  margin-bottom: 2rem;
-  line-height: 1.6;
 }
 
+/* 🔧 NUEVO: Expanded Content (Mobile) */
+.expandedContent {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(217, 166, 161, 0.2);
+  animation: expandContent 0.3s ease-out;
+}
+
+@keyframes expandContent {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.challengesSolutions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.challenges,
+.solutions {
+  margin-bottom: 1rem;
+}
+
+.challenges h4,
+.solutions h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem 0;
+}
+
+.challenges ul,
+.solutions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.challenges li,
+.solutions li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.challenges li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary-orange);
+}
+
+.solutions li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--primary-orange);
+}
+
+/* Desktop Meta */
 .studyMeta {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(217, 166, 161, 0.2);
+  margin-top: auto;
 }
 
 .metaItem {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 0.25rem;
+  flex: 1;
 }
 
 .metaLabel {
-  font-size: 0.8rem;
-  color: #242424;
-  opacity: 0.6;
-  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   font-weight: 500;
 }
 
 .metaValue {
-  font-size: 0.9rem;
-  color: #F07255;
+  font-size: 0.95rem;
+  color: var(--text-primary);
   font-weight: 600;
+}
+
+/* 🔧 NUEVO: Mobile Meta Row */
+.mobileMetaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(217, 166, 161, 0.2);
+}
+
+.mobileMetaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.metaIcon {
+  font-size: 0.85rem;
+}
+
+.expandIndicator {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-orange);
+  min-width: 24px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+/* 🔧 NUEVO: Tap Hint */
+.tapHint {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  font-style: italic;
+  opacity: 0.7;
 }
 
 .featuredBadge {
   position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #F07255;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--gradient-primary);
   color: white;
   padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(240, 114, 85, 0.3);
+  box-shadow: 0 4px 12px rgba(240, 114, 85, 0.3);
+  animation: pulse 2s ease-in-out infinite;
 }
 
-.ctaSection {
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* 🔧 NUEVO: Metrics Section */
+.metricsSection {
   text-align: center;
-  background: white;
-  padding: 3rem;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  margin-bottom: 4rem;
   opacity: 0;
+  transform: translateY(30px);
+}
+
+.metricsTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
+  line-height: 1.3;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.metric {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--bg-white);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(217, 166, 161, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.metric:hover {
+  transform: translateY(-5px);
+}
+
+.metricNumber {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-orange);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.metricLabel {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* CTA Section */
+.ctaSection {
+  background: var(--bg-white);
+  border-radius: var(--border-radius-large);
+  padding: 3rem;
+  text-align: center;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid rgba(217, 166, 161, 0.1);
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-secondary);
 }
 
 .ctaTitle {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 600;
+  color: var(--text-primary);
   margin-bottom: 1rem;
-  color: #242424;
+  line-height: 1.3;
 }
 
 .ctaText {
   font-size: 1.1rem;
-  color: #242424;
-  opacity: 0.7;
+  color: var(--text-secondary);
   margin-bottom: 2rem;
+  line-height: 1.6;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.6;
 }
 
 .ctaButton {
-  background: linear-gradient(135deg, #F07255, #ff8066);
+  background: var(--gradient-primary);
   color: white;
   padding: 1rem 2.5rem;
-  border-radius: 50px;
   border: none;
+  border-radius: 50px;
   font-weight: 600;
   font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
   font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+  min-height: 48px;
+  min-width: 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.ctaButton:hover::before {
+  left: 100%;
 }
 
 .ctaButton:hover {
@@ -175,23 +481,40 @@
   box-shadow: 0 10px 30px rgba(240, 114, 85, 0.4);
 }
 
-/* Animations */
+.ctaButton:active {
+  transform: translateY(-1px);
+}
+
+/* 🔧 NUEVO: Button Text & Icon */
+.buttonText {
+  line-height: 1;
+}
+
+.buttonIcon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ==============================================
+   ANIMATIONS
+   ============================================== */
+
 .fadeIn {
   animation: fadeIn 0.8s ease-out forwards;
 }
 
 .slideUp {
-  animation: slideUp 0.6s ease-out forwards;
+  animation: slideUp 0.8s ease-out forwards;
 }
 
 .fadeInUp {
-  animation: fadeInUp 0.8s ease-out 0.6s forwards;
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
 }
 
 @keyframes fadeIn {
   from { 
     opacity: 0; 
-    transform: translateY(30px); 
+    transform: translateY(20px); 
   }
   to { 
     opacity: 1; 
@@ -202,7 +525,7 @@
 @keyframes slideUp {
   from { 
     opacity: 0; 
-    transform: translateY(40px); 
+    transform: translateY(30px); 
   }
   to { 
     opacity: 1; 
@@ -213,7 +536,7 @@
 @keyframes fadeInUp {
   from { 
     opacity: 0; 
-    transform: translateY(30px); 
+    transform: translateY(40px); 
   }
   to { 
     opacity: 1; 
@@ -221,102 +544,347 @@
   }
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .caseStudies {
-    padding: 4rem 0;
+/* ==============================================
+   TABLET RESPONSIVE (768px - 1024px)
+   ============================================== */
+
+@media (max-width: 1024px) {
+  .studiesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .featured {
+    transform: scale(1);
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .ctaTitle {
+    font-size: 1.75rem;
   }
 
+  .metricsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .challengesSolutions {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ==============================================
+   MOBILE RESPONSIVE (768px and below)
+   ============================================== */
+
+@media (max-width: 768px) {
+  .caseStudies {
+    padding: 3rem 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .header {
+    margin-bottom: 3rem;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  
+  .subtitle {
+    font-size: 1.1rem;
+  }
+  
   .studiesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .studyCard {
+    padding: 2rem;
+    margin: 0;
+  }
+  
+  .featured {
+    transform: none;
+    border-width: 1px;
+  }
+
+  .cardHeader {
+    margin-bottom: 1rem;
+  }
+
+  .studyIcon {
+    font-size: 2rem;
+  }
+  
+  .studyNumber {
+    font-size: 3rem;
+  }
+  
+  .featured .studyNumber {
+    font-size: 3.25rem;
+  }
+  
+  .studyTitle {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .featured .studyTitle {
+    font-size: 1.5rem;
+  }
+  
+  .studyDescription {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  
+  /* Hide desktop meta on mobile */
+  .studyMeta {
+    display: none;
+  }
+
+  /* Show mobile meta */
+  .mobileMetaRow {
+    display: flex;
+  }
+  
+  .featuredBadge {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  /* Metrics responsive */
+  .metricsGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  .studyCard {
-    padding: 2rem 1.5rem;
-    margin: 0;
-  }
-
-  .featured {
-    transform: none;
-    margin-bottom: 1rem;
-  }
-
-  .featured:hover {
-    transform: translateY(-5px);
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-    padding: 0 1rem;
-  }
-
-  .studyNumber {
-    font-size: 3rem;
-  }
-
-  .studyTitle {
-    font-size: 1.3rem;
-  }
-
-  .studyDescription {
-    font-size: 0.95rem;
-  }
-
-  .ctaSection {
-    padding: 2rem 1.5rem;
-    margin: 0 1rem;
-  }
-
-  .ctaTitle {
-    font-size: 1.5rem;
-  }
-
-  .ctaText {
-    font-size: 1rem;
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .caseStudies {
-    padding: 3rem 0;
-  }
-
-  .studyCard {
-    padding: 1.5rem 1rem;
-  }
-
-  .studyNumber {
+  .metricNumber {
     font-size: 2.5rem;
   }
 
+  .metricsTitle {
+    font-size: 1.5rem;
+  }
+  
+  .ctaSection {
+    padding: 2rem;
+    margin: 0 0.5rem;
+  }
+  
+  .ctaTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .ctaText {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .ctaButton {
+    width: 100%;
+    max-width: 280px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+  }
+
+  .challengesSolutions {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* ==============================================
+   SMALL MOBILE (480px and below)
+   ============================================== */
+
+@media (max-width: 480px) {
+  .caseStudies {
+    padding: 2rem 0;
+  }
+  
+  .container {
+    padding: 0 0.75rem;
+  }
+  
+  .header {
+    margin-bottom: 2rem;
+  }
+  
+  .title {
+    font-size: 1.9rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .studiesGrid {
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  
+  .studyCard {
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+  }
+
+  .studyIcon {
+    font-size: 1.75rem;
+  }
+  
+  .studyNumber {
+    font-size: 2.5rem;
+  }
+  
+  .featured .studyNumber {
+    font-size: 2.75rem;
+  }
+  
   .studyTitle {
     font-size: 1.2rem;
   }
-
-  .ctaSection {
-    padding: 1.5rem 1rem;
+  
+  .featured .studyTitle {
+    font-size: 1.3rem;
+  }
+  
+  .studyDescription {
+    font-size: 0.9rem;
+  }
+  
+  .featuredBadge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
   }
 
+  .metricNumber {
+    font-size: 2rem;
+  }
+  
+  .ctaSection {
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+  }
+  
   .ctaTitle {
     font-size: 1.3rem;
   }
+  
+  .ctaText {
+    font-size: 0.95rem;
+  }
+  
+  .ctaButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
 
-  .studyMeta {
-    flex-direction: column;
-    gap: 1rem;
+/* ==============================================
+   ACCESSIBILITY & PERFORMANCE
+   ============================================== */
+
+/* Focus states */
+.ctaButton:focus {
+  outline: 2px solid var(--primary-orange);
+  outline-offset: 2px;
+}
+
+.studyCard:focus-within {
+  outline: 2px solid var(--primary-orange);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .studyCard {
+    border: 2px solid var(--text-primary);
+  }
+  
+  .featuredBadge {
+    border: 1px solid white;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .caseStudies::before,
+  .featuredBadge,
+  .studyCard,
+  .ctaButton {
+    animation: none;
+  }
+  
+  .studyCard:hover,
+  .ctaButton:hover {
+    transform: none;
+  }
+  
+  .ctaButton::before {
+    display: none;
   }
 
-  .metaItem {
-    flex-direction: row;
-    justify-content: space-between;
+  .expandedContent {
+    animation: none;
+  }
+}
+
+/* VERSIÓN MEJORADA 🚀 (Opcional) */
+@media (max-width: 768px) {
+  .ctaButton,
+  .mobileCard {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none; /*  Versión estándar */
+    touch-action: manipulation;
+    min-height: 44px; /*  Área táctil accesible */
+    cursor: pointer; /*  Indicador visual */
+  }
+  
+  /*  Feedback táctil */
+  .ctaButton:active,
+  .mobileCard:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Print styles */
+@media print {
+  .caseStudies::before,
+  .featuredBadge,
+  .ctaButton {
+    display: none;
+  }
+  
+  .studyCard {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    break-inside: avoid;
+  }
+
+  .expandedContent {
+    display: block;
+  }
+
+  .tapHint {
+    display: none;
   }
 }

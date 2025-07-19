@@ -1,73 +1,196 @@
-export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
+// lib/analytics.ts
+// Complete analytics functions for Grovi website
 
-// Debug: Log the GA_TRACKING_ID at module level
-console.log('📊 Analytics module loaded - GA_TRACKING_ID:', GA_TRACKING_ID)
+// Google Analytics Tracking ID
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID || 'G-RDMLRL7W3Z'
 
-// Declaración global para gtag
+// Type definitions for Google Analytics
+interface GtagFunction {
+  (command: 'config', targetId: string, config?: Record<string, unknown>): void;
+  (command: 'event', eventName: string, eventParameters?: Record<string, unknown>): void;
+  (command: string, ...args: unknown[]): void;
+}
+
 declare global {
   interface Window {
-    gtag: (
-      command: 'config' | 'event' | 'js' | 'consent',
-      targetId: string | Date,
-      config?: Record<string, unknown>
-    ) => void
+    gtag?: GtagFunction;
   }
 }
 
-// Función para rastrear páginas vistas
-export const pageview = (url: string) => {
-  if (typeof window !== 'undefined' && GA_TRACKING_ID) {
+// Check if gtag is available
+const isGtagAvailable = (): boolean => {
+  return typeof window !== 'undefined' && 'gtag' in window && typeof window.gtag === 'function'
+}
+
+// Log for development
+const devLog = (message: string, data?: string | Record<string, unknown>) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`📊 Analytics: ${message}`, data || '')
+  }
+}
+
+// Page view tracking
+export const pageview = (url: string): void => {
+  if (isGtagAvailable() && window.gtag) {
     window.gtag('config', GA_TRACKING_ID, {
       page_path: url,
     })
   }
+  devLog('Page View', url)
 }
 
-// Función para rastrear eventos personalizados
-export const event = ({ action, category, label, value }: {
-  action: string
-  category: string
-  label?: string
-  value?: number
-}) => {
-  if (typeof window !== 'undefined' && GA_TRACKING_ID) {
-    window.gtag('event', action, {
-      event_category: category,
-      event_label: label,
-      value: value,
+// Button click tracking
+export const trackButtonClick = (action: string, section: string): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'click', {
+      event_category: section,
+      event_label: action,
     })
   }
+  devLog('Button Click', `${action} in ${section}`)
 }
 
-// Eventos específicos para Grovi
-export const trackButtonClick = (buttonName: string, section: string) => {
-  event({
-    action: 'click',
-    category: 'Button',
-    label: `${section} - ${buttonName}`,
-  })
+// Scroll tracking
+export const trackScroll = (section: string): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'scroll', {
+      event_category: 'Navigation',
+      event_label: section,
+    })
+  }
+  devLog('Scroll to', section)
 }
 
-export const trackFormSubmit = (formName: string) => {
-  event({
-    action: 'submit',
-    category: 'Form',
-    label: formName,
-  })
+// Calendly load tracking
+export const trackCalendlyLoad = (status: string): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'calendly_load', {
+      event_category: 'Calendly',
+      event_label: status,
+    })
+  }
+  devLog('Calendly Load', status)
 }
 
-export const trackCalendlyOpen = () => {
-  event({
-    action: 'open',
-    category: 'Calendly',
-    label: 'Agendar Llamada',
-  })
+// Calendly error tracking
+export const trackCalendlyError = (error: string, retryCount: number): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'calendly_error', {
+      event_category: 'Calendly',
+      event_label: error,
+      value: retryCount,
+    })
+  }
+  devLog('Calendly Error', `${error} (Retry: ${retryCount})`)
 }
 
-export const trackScroll = (section: string) => {
-  event({
-    action: 'scroll_to',
-    category: 'Navigation',
-    label: section,
-  })
+// Form submission tracking
+export const trackFormSubmission = (formName: string, success = true): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', success ? 'form_submit' : 'form_error', {
+      event_category: 'Form',
+      event_label: formName,
+    })
+  }
+  devLog('Form Submission', `${formName} - ${success ? 'Success' : 'Error'}`)
 }
+
+// Download tracking
+export const trackDownload = (fileName: string): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'file_download', {
+      event_category: 'Download',
+      event_label: fileName,
+    })
+  }
+  devLog('Download', fileName)
+}
+
+// External link tracking
+export const trackExternalLink = (url: string): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'click', {
+      event_category: 'External Link',
+      event_label: url,
+    })
+  }
+  devLog('External Link', url)
+}
+
+// Custom event tracking
+export const trackCustomEvent = (eventName: string, parameters?: Record<string, unknown>): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', eventName, parameters)
+  }
+  devLog(`Custom Event: ${eventName}`, parameters)
+}
+
+// Contact method tracking
+export const trackContactMethod = (
+  method: 'email' | 'phone' | 'whatsapp' | 'form', 
+  location?: string
+): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'contact_attempt', {
+      event_category: 'Contact',
+      event_label: method,
+      custom_parameter_1: location || 'unknown',
+    })
+  }
+  devLog('Contact Method', `${method} from ${location || 'unknown location'}`)
+}
+
+// Hero CTA tracking
+export const trackHeroCTA = (ctaText: string, targetSection: string): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'hero_cta_click', {
+      event_category: 'Hero',
+      event_label: ctaText,
+      custom_parameter_1: targetSection,
+    })
+  }
+  devLog('Hero CTA', `${ctaText} → ${targetSection}`)
+}
+
+// Section visibility tracking
+export const trackSectionView = (sectionName: string): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'section_view', {
+      event_category: 'Engagement',
+      event_label: sectionName,
+    })
+  }
+  devLog('Section View', sectionName)
+}
+
+// Time on page tracking
+export const trackTimeOnPage = (seconds: number, page: string): void => {
+  if (isGtagAvailable() && window.gtag) {
+    window.gtag('event', 'time_on_page', {
+      event_category: 'Engagement',
+      event_label: page,
+      value: Math.round(seconds),
+    })
+  }
+  devLog('Time on Page', `${Math.round(seconds)}s on ${page}`)
+}
+
+// Named export object for easy access
+const analytics = {
+  pageview,
+  trackButtonClick,
+  trackScroll,
+  trackCalendlyLoad,
+  trackCalendlyError,
+  trackFormSubmission,
+  trackDownload,
+  trackExternalLink,
+  trackCustomEvent,
+  trackContactMethod,
+  trackHeroCTA,
+  trackSectionView,
+  trackTimeOnPage,
+  GA_TRACKING_ID
+}
+
+export default analytics

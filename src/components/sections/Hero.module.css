@@ -1,3 +1,8 @@
+/* =====================================================
+   HERO SECTION - TU DISEÑO + FIXES MÓVIL APLICADOS
+   Mantiene toda tu estética, corrige altura y centrado
+   ===================================================== */
+
 .hero {
   min-height: 75vh;
   display: flex;
@@ -337,40 +342,66 @@
   }
 }
 
-/* Responsive Design */
+/* =====================================================
+   RESPONSIVE DESIGN - FIXES APLICADOS
+   ===================================================== */
+
 @media (max-width: 1024px) {
   .networkHub {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
   }
   
   .networkStats {
     gap: 1.5rem;
   }
+  
+  .title {
+    font-size: 2.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1.15rem;
+  }
 }
 
+/* 🔧 FIX 1: TABLET OPTIMIZATION */
 @media (max-width: 768px) {
   .hero {
-    min-height: 70vh;
+    /* 🚀 ALTURA REDUCIDA: De 70vh a 50vh */
+    min-height: 50vh;
+    padding-top: 60px; /* Reducido de 80px */
+    padding-bottom: 2rem; /* Agregado padding bottom */
   }
 
   .container {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 2rem;
+    gap: 1.5rem; /* Reducido de 2rem */
     padding: 1rem;
-    min-height: calc(70vh - 80px);
+    /* 🚀 ALTURA CONTAINER REDUCIDA */
+    min-height: auto; /* Eliminado min-height fixed */
+    justify-content: center;
+  }
+
+  .content {
+    /* 🚀 CENTRADO PERFECTO */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .title {
-    font-size: 2.2rem;
-    line-height: 1.2;
+    font-size: 2rem; /* Reducido de 2.2rem */
+    line-height: 1.3; /* Mejorado de 1.2 */
     margin-bottom: 1rem;
   }
 
   .subtitle {
-    font-size: 1.1rem;
+    font-size: 1rem; /* Reducido de 1.1rem */
     margin-bottom: 1.5rem;
+    max-width: 90%; /* Agregado max-width */
   }
 
   .buttons {
@@ -382,113 +413,139 @@
 
   .primaryButton, .secondaryButton {
     width: 100%;
-    max-width: 280px;
+    max-width: 260px; /* Reducido de 280px */
     justify-content: center;
-    padding: 0.9rem 1.8rem;
+    padding: 0.875rem 1.5rem; /* Reducido padding */
+    font-size: 0.95rem; /* Reducido font-size */
   }
 
   .networkStats {
     justify-content: center;
     gap: 1rem;
+    margin-bottom: 1rem; /* Agregado margin-bottom */
   }
 
   .statNumber {
-    font-size: 1.5rem;
+    font-size: 1.4rem; /* Reducido de 1.5rem */
   }
 
   .statLabel {
-    font-size: 0.8rem;
+    font-size: 0.75rem; /* Reducido de 0.8rem */
+  }
+
+  .visual {
+    margin-top: 1rem; /* Agregado margin-top */
   }
 
   .networkHub {
-    width: 180px;
-    height: 180px;
+    width: 160px; /* Reducido de 180px */
+    height: 160px;
   }
 
   .centralNode {
-    width: 50px;
-    height: 50px;
+    width: 45px; /* Reducido de 50px */
+    height: 45px;
   }
 
   .nodeCore {
-    width: 40px;
-    height: 40px;
+    width: 35px; /* Reducido de 40px */
+    height: 35px;
   }
 
   .nodeIcon {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Reducido de 1.2rem */
   }
 
   .satelliteCore {
-    width: 25px;
-    height: 25px;
-    font-size: 0.9rem;
+    width: 22px; /* Reducido de 25px */
+    height: 22px;
+    font-size: 0.8rem; /* Reducido de 0.9rem */
   }
 
+  /* 🚀 PARTÍCULAS SIMPLIFICADAS EN MÓVIL */
   .particle {
-    width: 4px !important;
-    height: 4px !important;
+    width: 3px !important;
+    height: 3px !important;
+    opacity: 0.4 !important; /* Reducida opacidad */
+  }
+
+  .particleContainer {
+    opacity: 0.6; /* Reducida intensidad general */
   }
 }
 
+/* 🔧 FIX 2: MOBILE SMALL OPTIMIZATION */
 @media (max-width: 480px) {
   .hero {
-    min-height: 65vh;
+    /* 🚀 ALTURA MÓVIL PEQUEÑO: Aún más compacta */
+    min-height: 45vh;
+    padding-top: 40px; /* Reducido de 60px */
+    padding-bottom: 1.5rem;
   }
 
   .container {
-    min-height: calc(65vh - 80px);
-    gap: 1.5rem;
-    padding: 0.5rem;
+    gap: 1rem; /* Reducido de 1.5rem */
+    padding: 0.75rem; /* Reducido de 1rem */
   }
 
   .title {
-    font-size: 1.9rem;
+    font-size: 1.75rem; /* Reducido de 1.9rem */
+    margin-bottom: 0.75rem; /* Reducido de 1rem */
   }
 
   .subtitle {
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reducido de 1rem */
     margin-bottom: 1rem;
+    line-height: 1.5;
+    max-width: 95%;
   }
 
   .buttons {
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; /* Reducido de 1.5rem */
+    gap: 0.75rem; /* Reducido de 1rem */
+  }
+
+  .primaryButton, .secondaryButton {
+    max-width: 240px; /* Reducido de 260px */
+    padding: 0.75rem 1.25rem; /* Reducido padding */
+    font-size: 0.9rem; /* Reducido font-size */
   }
 
   .networkHub {
-    width: 140px;
-    height: 140px;
+    width: 120px; /* Reducido de 140px */
+    height: 120px;
   }
 
   .centralNode {
-    width: 40px;
-    height: 40px;
+    width: 35px; /* Reducido de 40px */
+    height: 35px;
   }
 
   .nodeCore {
-    width: 32px;
-    height: 32px;
+    width: 28px; /* Reducido de 32px */
+    height: 28px;
   }
 
   .nodeIcon {
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reducido de 1rem */
   }
 
   .satelliteCore {
-    width: 20px;
-    height: 20px;
-    font-size: 0.8rem;
+    width: 18px; /* Reducido de 20px */
+    height: 18px;
+    font-size: 0.7rem; /* Reducido de 0.8rem */
   }
 
   .nodeRing {
-    width: 40px;
-    height: 40px;
+    width: 35px; /* Reducido de 40px */
+    height: 35px;
   }
 
   .networkStats {
     flex-direction: row;
     gap: 0.5rem;
     justify-content: space-around;
+    margin-bottom: 0.5rem; /* Reducido */
   }
 
   .stat {
@@ -497,18 +554,84 @@
   }
 
   .statNumber {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Reducido de 1.2rem */
   }
 
   .statLabel {
-    font-size: 0.7rem;
+    font-size: 0.65rem; /* Reducido de 0.7rem */
+    line-height: 1.2;
   }
 
   .satelliteNode {
-    width: 20px;
-    height: 20px;
+    width: 18px; /* Reducido de 20px */
+    height: 18px;
+  }
+
+  /* 🚀 PARTÍCULAS MÁS SUTILES EN MÓVILES PEQUEÑOS */
+  .particle {
+    width: 2px !important;
+    height: 2px !important;
+    opacity: 0.3 !important;
+  }
+
+  .particleContainer {
+    opacity: 0.4; /* Más sutil */
+  }
+
+  .connectionLine {
+    opacity: 0.2 !important; /* Líneas más sutiles */
   }
 }
+
+/* 🔧 FIX 3: EXTRA SMALL MOBILE (iPhone SE, etc.) */
+@media (max-width: 375px) {
+  .hero {
+    min-height: 40vh;
+    padding-top: 30px;
+    padding-bottom: 1rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .buttons {
+    gap: 0.5rem;
+  }
+
+  .primaryButton, .secondaryButton {
+    max-width: 200px;
+    padding: 0.625rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .networkHub {
+    width: 100px;
+    height: 100px;
+  }
+
+  .networkStats {
+    gap: 0.25rem;
+  }
+
+  .statNumber {
+    font-size: 1rem;
+  }
+
+  .statLabel {
+    font-size: 0.6rem;
+  }
+}
+
+/* =====================================================
+   PERFORMANCE & ACCESSIBILITY - TU CÓDIGO ORIGINAL
+   ===================================================== */
 
 /* Performance optimizations */
 .particle, .connectionLine, .satelliteNode {
@@ -524,4 +647,44 @@
   .nodeCore {
     animation: none;
   }
+
+  /* 🚀 OPTIMIZACIÓN: Fallback para animaciones reducidas */
+  .particle {
+    opacity: 0.2 !important;
+  }
+}
+
+/* 🔧 FIX 4: SAFE AREA SUPPORT (iPhone X+) */
+@supports (padding: max(0px)) {
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: max(60px, env(safe-area-inset-top));
+      padding-bottom: max(2rem, env(safe-area-inset-bottom));
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero {
+      padding-top: max(40px, env(safe-area-inset-top));
+      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* 🔧 FIX 5: TOUCH OPTIMIZATION */
+@media (max-width: 768px) {
+  .primaryButton, .secondaryButton {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+  }
+}
+
+/* 🔧 FIX 6: FOCUS STATES FOR ACCESSIBILITY */
+.primaryButton:focus,
+.secondaryButton:focus {
+  outline: 2px solid #F07255;
+  outline-offset: 2px;
 }
