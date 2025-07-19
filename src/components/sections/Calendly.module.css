@@ -1,6 +1,5 @@
 /* =====================================================
-   CALENDLY CSS - TU DISEÑO + CLASES FALTANTES
-   Mantiene exactamente tu estética visual
+   CALENDLY FIXES - BETTER DESKTOP/MOBILE COMPATIBILITY
    ===================================================== */
 
 .calendly {
@@ -41,174 +40,56 @@
   text-align: center;
   margin-bottom: 4rem;
   opacity: 0;
-}
-
-/* =====================================================
-   MOBILE CALENDLY STYLES - NUEVAS CLASES
-   ===================================================== */
-
-.mobileCalendlyWrapper {
-  display: flex;
-  justify-content: center;
-  padding: 0 1rem;
-}
-
-.mobileCalendlyCard {
-  background: #F8F5F1;
-  border-radius: 20px;
-  padding: 2rem;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-  border: 2px solid rgba(217, 166, 161, 0.2);
   position: relative;
-  overflow: hidden;
-}
-
-.calendarIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  display: block;
-}
-
-.mobileCalendlyTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #242424;
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-}
-
-.callDuration {
-  background: linear-gradient(135deg, #F07255, #ff8066);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 15px rgba(240, 114, 85, 0.3);
-}
-
-.mobileCalendlyDescription {
-  font-size: 1rem;
-  color: #242424;
-  opacity: 0.7;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.mobileFeatures {
-  margin-bottom: 2rem;
-  text-align: left;
-}
-
-.feature {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
-  color: #242424;
-  opacity: 0.8;
-}
-
-.featureIcon {
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.mobileCalendlyButton {
-  background: linear-gradient(135deg, #F07255, #ff8066);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
-  width: 100%;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: 48px;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.mobileCalendlyButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(240, 114, 85, 0.4);
-}
-
-.mobileCalendlyButton:active {
-  transform: translateY(0);
-}
-
-.buttonText {
-  line-height: 1;
-}
-
-.buttonIcon {
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.mobileInfo {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-top: 1rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(217, 166, 161, 0.3);
-}
-
-.infoItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
-  font-size: 0.85rem;
-  color: #242424;
-  opacity: 0.7;
-}
-
-.infoIcon {
-  font-size: 1.2rem;
-  margin-bottom: 0.25rem;
 }
 
 /* =====================================================
-   DESKTOP CALENDLY STYLES - NUEVAS CLASES
+   🔧 FIXED: DESKTOP CALENDLY WIDGET
+   Better height and responsiveness
    ===================================================== */
 
 .desktopCalendlyWrapper {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .calendlyWidget {
-  max-width: 700px;
-  margin: 0 auto;
-  height: 630px;
+  max-width: 800px; /* Increased from 700px */
+  width: 100%;
+  height: 700px; /* Increased from 630px for better content visibility */
   background: #F8F5F1;
   border-radius: 20px;
-  padding: 1rem;
+  padding: 1.5rem; /* Increased padding */
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
   border: 2px solid rgba(217, 166, 161, 0.2);
+  margin: 0 auto;
 }
 
 .widgetWrapper {
   width: 100%;
   height: 100%;
   position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+/* 🔧 FIXED: Better iframe integration */
+.calendlyWidget .calendly-inline-widget {
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  background: white !important;
+  min-height: 100% !important;
+  width: 100% !important;
+}
+
+.calendlyWidget iframe {
+  border-radius: 15px !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
 }
 
 .widgetOverlay {
@@ -220,16 +101,222 @@
   pointer-events: none;
   border-radius: 15px;
   box-shadow: inset 0 0 0 1px rgba(217, 166, 161, 0.1);
-}
-
-.calendlyWidget .calendly-inline-widget {
-  border-radius: 15px !important;
-  overflow: hidden !important;
-  background: white !important;
+  z-index: 1;
 }
 
 /* =====================================================
-   LOADING & ERROR STATES - TU DISEÑO + MEJORAS
+   🔧 IMPROVED: MOBILE CALENDLY CARD
+   Better UX and touch interactions
+   ===================================================== */
+
+.mobileCalendlyWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.mobileCalendlyCard {
+  background: #F8F5F1;
+  border-radius: 20px;
+  padding: 2.5rem 2rem; /* Increased top/bottom padding */
+  max-width: 420px; /* Slightly larger */
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+  border: 2px solid rgba(217, 166, 161, 0.2);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.calendarIcon {
+  font-size: 3.5rem; /* Slightly larger */
+  margin-bottom: 1.5rem; /* More space */
+  display: block;
+  color: #F07255;
+}
+
+.mobileCalendlyTitle {
+  font-size: 1.6rem; /* Larger for better readability */
+  font-weight: 700;
+  color: #242424;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.callDuration {
+  background: linear-gradient(135deg, #F07255, #ff8066);
+  color: white;
+  padding: 0.6rem 1.2rem; /* Larger padding */
+  border-radius: 50px;
+  font-size: 1rem; /* Larger text */
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 15px rgba(240, 114, 85, 0.3);
+}
+
+.mobileCalendlyDescription {
+  font-size: 1.05rem; /* Larger for better readability */
+  color: #242424;
+  opacity: 0.8; /* Better contrast */
+  line-height: 1.6;
+  margin-bottom: 2.5rem; /* More space */
+}
+
+.mobileFeatures {
+  margin-bottom: 2.5rem;
+  text-align: left;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* More space */
+  margin-bottom: 1.25rem; /* More space between features */
+  font-size: 1rem; /* Larger text */
+  color: #242424;
+  opacity: 0.85; /* Better contrast */
+}
+
+.featureIcon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  color: #F07255;
+}
+
+/* 🔧 IMPROVED: Better mobile button */
+.mobileCalendlyButton {
+  background: linear-gradient(135deg, #F07255, #ff8066);
+  color: white;
+  border: none;
+  padding: 1.2rem 2rem; /* Larger padding */
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem; /* Larger text */
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 25px rgba(240, 114, 85, 0.35);
+  width: 100%;
+  margin-bottom: 2rem; /* More space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 52px; /* Larger touch target */
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileCalendlyButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(240, 114, 85, 0.45);
+}
+
+.mobileCalendlyButton:active {
+  transform: translateY(-1px);
+}
+
+.buttonText {
+  line-height: 1;
+  font-weight: 600;
+}
+
+.buttonIcon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* 🔧 NEW: Button loading state */
+.mobileCalendlyButton.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.mobileCalendlyButton.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.mobileInfo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; /* More space */
+  margin-top: 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(217, 166, 161, 0.3);
+}
+
+.infoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem; /* More space */
+  font-size: 0.9rem; /* Larger text */
+  color: #242424;
+  opacity: 0.8; /* Better contrast */
+  text-align: center;
+}
+
+.infoIcon {
+  font-size: 1.4rem; /* Larger icons */
+  margin-bottom: 0.25rem;
+  color: #F07255;
+}
+
+/* =====================================================
+   🔧 FIXED: RESPONSIVE VISIBILITY LOGIC
+   Clear separation between mobile and desktop
+   ===================================================== */
+
+/* Desktop: Show widget, hide mobile card */
+@media (min-width: 769px) {
+  .desktopCalendlyWrapper {
+    display: flex;
+  }
+  
+  .mobileCalendlyWrapper {
+    display: none;
+  }
+}
+
+/* Mobile/Tablet: Show mobile card, hide widget */
+@media (max-width: 768px) {
+  .desktopCalendlyWrapper {
+    display: none;
+  }
+  
+  .mobileCalendlyWrapper {
+    display: flex;
+  }
+  
+  .calendly {
+    padding: 4rem 0;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+  }
+  
+  .subtitle {
+    font-size: 1.05rem;
+    padding: 0 1rem;
+  }
+}
+
+/* =====================================================
+   🔧 IMPROVED: LOADING & ERROR STATES
    ===================================================== */
 
 .loadingFallback {
@@ -238,18 +325,21 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  min-height: 400px; /* Minimum height */
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
+  background: linear-gradient(135deg, #f8f5f1 0%, #ffffff 100%);
+  border-radius: 15px;
 }
 
 .loadingSpinner {
-  width: 40px;
-  height: 40px;
+  width: 50px; /* Larger spinner */
+  height: 50px;
   border: 4px solid #D9A6A1;
   border-top: 4px solid #F07255;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 @keyframes spin {
@@ -259,86 +349,99 @@
 
 .loadingFallback h3 {
   color: #242424;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .loadingFallback p {
   color: #242424;
   opacity: 0.7;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  max-width: 400px;
 }
 
-/* 🔧 NUEVO: Loading features */
 .loadingFeatures {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
   margin-top: 1rem;
+  max-width: 300px;
 }
 
 .loadingFeature {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #242424;
   opacity: 0.6;
   text-align: center;
+  padding: 0.5rem;
+  background: rgba(240, 114, 85, 0.05);
+  border-radius: 8px;
 }
 
+/* 🔧 IMPROVED: Error handling */
 .errorFallback {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
+  min-height: 450px;
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
   background: linear-gradient(135deg, #f8f5f1 0%, #ffffff 100%);
   border-radius: 15px;
 }
 
 .errorIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  color: #F07255;
 }
 
 .errorFallback h3 {
   color: #242424;
-  margin-bottom: 0.5rem;
-  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .errorFallback p {
   color: #242424;
   opacity: 0.7;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+  max-width: 400px;
+  line-height: 1.6;
 }
 
-/* 🔧 NUEVO: Error actions con botón retry */
 .errorActions {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   margin-bottom: 2rem;
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
 }
 
 .retryButton {
   background: linear-gradient(135deg, #F07255, #ff8066);
   color: white;
   border: none;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(240, 114, 85, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
+  min-height: 48px;
 }
 
 .retryButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(240, 114, 85, 0.4);
+  box-shadow: 0 10px 30px rgba(240, 114, 85, 0.4);
 }
 
 .retryButton:disabled {
@@ -346,415 +449,192 @@
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+  opacity: 0.6;
 }
 
 .fallbackButton {
   background: linear-gradient(135deg, #F07255, #ff8066);
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2rem;
   border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(240, 114, 85, 0.3);
-  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  font-size: 1rem;
 }
 
 .fallbackButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(240, 114, 85, 0.4);
-}
-
-.contactAlternative {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(217, 166, 161, 0.3);
-  width: 100%;
-}
-
-.contactAlternative p {
-  margin-bottom: 1rem;
-  font-weight: 600;
-  color: #242424;
-}
-
-.emailLink, .phoneLink {
-  display: block;
-  color: #F07255;
+  box-shadow: 0 10px 30px rgba(240, 114, 85, 0.4);
   text-decoration: none;
-  font-weight: 600;
-  margin: 0.5rem 0;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.emailLink:hover, .phoneLink:hover {
-  background: rgba(240, 114, 85, 0.1);
-  transform: translateY(-1px);
+  color: white;
 }
 
 /* =====================================================
-   BENEFITS SECTION - TU DISEÑO ORIGINAL
+   🔧 IMPROVED: MOBILE SPECIFIC FIXES
    ===================================================== */
 
-.benefits {
-  margin-bottom: 3rem;
-  opacity: 0;
-}
-
-.benefitsTitle {
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-  color: #242424;
-}
-
-.benefitsList {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.benefit {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: #F8F5F1;
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-
-.benefit:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(217, 166, 161, 0.2);
-}
-
-.benefitIcon {
-  font-size: 2.5rem;
-  flex-shrink: 0;
-}
-
-.benefitContent h4 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #242424;
-  margin-bottom: 0.5rem;
-}
-
-.benefitContent p {
-  font-size: 0.95rem;
-  color: #242424;
-  opacity: 0.7;
-  line-height: 1.5;
-}
-
-/* =====================================================
-   GUARANTEE SECTION - TU DISEÑO ORIGINAL
-   ===================================================== */
-
-.guarantee {
-  opacity: 0;
-}
-
-.guaranteeContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  background: linear-gradient(135deg, #D9A6A1, #D6CDBF);
-  padding: 2rem;
-  border-radius: 20px;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.guaranteeIcon {
-  font-size: 2.5rem;
-  flex-shrink: 0;
-}
-
-.guaranteeTitle {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #242424;
-  margin-bottom: 0.5rem;
-}
-
-.guaranteeText {
-  color: #242424;
-  opacity: 0.8;
-  line-height: 1.5;
-}
-
-/* 🔧 NUEVO: Guarantee description específica */
-.guaranteeDescription {
-  color: #242424;
-  opacity: 0.8;
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* =====================================================
-   ANIMATIONS - TUS ANIMACIONES ORIGINALES
-   ===================================================== */
-
-.fadeIn {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.fadeInUp {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-@keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(40px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-/* =====================================================
-   RESPONSIVE - TU DISEÑO + MOBILE OPTIMIZATIONS
-   ===================================================== */
-
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .calendly {
-    padding: 4rem 0;
+    padding: 3rem 0;
   }
-
+  
   .container {
     padding: 0 1rem;
   }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-    padding: 0 1rem;
-  }
-
-  .benefitsTitle {
-    font-size: 1.5rem;
-  }
-
-  /* Mobile Calendly adjustments */
+  
   .mobileCalendlyWrapper {
-    padding: 0;
+    padding: 0 0.5rem;
   }
 
   .mobileCalendlyCard {
-    padding: 1.5rem;
-    margin: 0 0.5rem;
+    padding: 2rem 1.5rem;
+    margin: 0;
+    border-radius: 16px;
+  }
+
+  .calendarIcon {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
   }
 
   .mobileCalendlyTitle {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .callDuration {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
   }
 
   .mobileCalendlyDescription {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .feature {
     font-size: 0.95rem;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .featureIcon {
+    font-size: 1.1rem;
+  }
+
+  .mobileCalendlyButton {
+    padding: 1.1rem 1.75rem;
+    font-size: 1rem;
+    min-height: 50px;
   }
 
   .mobileInfo {
     grid-template-columns: 1fr;
-    gap: 0.75rem;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    padding-top: 1.5rem;
   }
 
   .infoItem {
     flex-direction: row;
     justify-content: center;
+    gap: 0.75rem;
   }
 
-  /* Desktop widget on mobile (hidden) */
-  .calendlyWidget {
-    max-width: 100%;
-    height: 500px;
-    padding: 1rem;
-    margin: 0;
+  .infoIcon {
+    font-size: 1.2rem;
+    margin-bottom: 0;
   }
 
-  .benefitsList {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  /* Error/Loading states on mobile */
+  .loadingFallback,
+  .errorFallback {
+    padding: 2rem 1rem;
+    min-height: 350px;
   }
 
-  .benefit {
-    padding: 1rem;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
+  .loadingSpinner {
+    width: 40px;
+    height: 40px;
   }
 
-  .benefitIcon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+  .loadingFallback h3,
+  .errorFallback h3 {
+    font-size: 1.2rem;
   }
 
-  .guaranteeContent {
-    flex-direction: column;
-    padding: 1.5rem;
-    gap: 0.5rem;
-  }
-
-  .guaranteeIcon {
-    font-size: 2rem;
+  .loadingFallback p,
+  .errorFallback p {
+    font-size: 1rem;
   }
 
   .errorActions {
     max-width: 100%;
   }
 
-  .loadingFeatures {
-    gap: 0.5rem;
-  }
-
-  .loadingFeature {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .calendly {
-    padding: 3rem 0;
-  }
-
-  .mobileCalendlyCard {
-    padding: 1.25rem;
-    margin: 0 0.25rem;
-  }
-
-  .calendarIcon {
-    font-size: 2.5rem;
-  }
-
-  .mobileCalendlyTitle {
-    font-size: 1.2rem;
-  }
-
-  .callDuration {
-    font-size: 0.85rem;
-    padding: 0.4rem 0.8rem;
-  }
-
-  .feature {
-    font-size: 0.9rem;
-  }
-
-  .mobileCalendlyButton {
-    padding: 0.875rem 1.5rem;
+  .retryButton,
+  .fallbackButton {
+    padding: 1rem 1.5rem;
     font-size: 0.95rem;
   }
-
-  .calendlyWidget {
-    height: 450px;
-    padding: 0.75rem;
-    border-radius: 15px;
-  }
-
-  .benefit {
-    padding: 1rem 0.75rem;
-  }
-
-  .benefitContent h4 {
-    font-size: 1rem;
-  }
-
-  .benefitContent p {
-    font-size: 0.9rem;
-  }
-
-  .guaranteeContent {
-    padding: 1.25rem;
-  }
-
-  .guaranteeTitle {
-    font-size: 1.1rem;
-  }
-
-  .guaranteeDescription {
-    font-size: 0.9rem;
-  }
-
-  .loadingFallback {
-    padding: 1rem;
-  }
-
-  .loadingFallback h3 {
-    font-size: 1.1rem;
-  }
-
-  .loadingFallback p {
-    font-size: 0.9rem;
-  }
-
-  .errorFallback {
-    padding: 1.5rem;
-  }
 }
 
 /* =====================================================
-   PERFORMANCE OPTIMIZATIONS
+   🔧 NEW: LARGE DESKTOP OPTIMIZATION
    ===================================================== */
 
-@media (max-width: 768px) {
+@media (min-width: 1200px) {
   .calendlyWidget {
-    contain: strict;
-    isolation: isolate;
+    max-width: 900px;
+    height: 750px;
+    padding: 2rem;
   }
   
-  .calendlyWidget .calendly-inline-widget {
-    transform: translateZ(0);
-    backface-visibility: hidden;
+  .title {
+    font-size: 2.8rem;
   }
-
-  .mobileCalendlyButton {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-    touch-action: manipulation;
+  
+  .subtitle {
+    font-size: 1.2rem;
   }
 }
 
 /* =====================================================
-   ACCESSIBILITY & FOCUS STATES
+   PERFORMANCE & ACCESSIBILITY IMPROVEMENTS
    ===================================================== */
 
+/* Hardware acceleration */
+.calendlyWidget,
+.mobileCalendlyCard,
+.mobileCalendlyButton {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Better focus states */
 .mobileCalendlyButton:focus,
 .retryButton:focus,
 .fallbackButton:focus {
-  outline: 2px solid #F07255;
+  outline: 3px solid #F07255;
   outline-offset: 2px;
 }
 
-/* High contrast mode support */
+/* High contrast mode */
 @media (prefers-contrast: high) {
   .mobileCalendlyCard,
   .calendlyWidget {
     border-width: 3px;
+    border-color: #F07255;
+  }
+  
+  .mobileCalendlyButton {
+    border: 2px solid white;
   }
 }
 
@@ -762,27 +642,39 @@
 @media (prefers-reduced-motion: reduce) {
   .mobileCalendlyButton:hover,
   .retryButton:hover,
-  .fallbackButton:hover,
-  .benefit:hover {
+  .fallbackButton:hover {
     transform: none;
   }
   
   .loadingSpinner {
     animation: none;
   }
+  
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
-/* Print styles */
+/* Print optimization */
 @media print {
   .mobileCalendlyButton,
   .retryButton,
-  .loadingSpinner {
+  .loadingSpinner,
+  .calendlyWidget {
     display: none;
   }
   
-  .mobileCalendlyCard,
-  .calendlyWidget {
+  .mobileCalendlyCard {
     box-shadow: none;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
+  }
+  
+  .mobileCalendlyCard::after {
+    content: "Visit www.grovi.net to schedule your consultation";
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+    text-align: center;
   }
 }

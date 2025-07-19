@@ -1,16 +1,17 @@
 /* =====================================================
-   HERO SECTION - TU DISEÑO + FIXES MÓVIL APLICADOS
-   Mantiene toda tu estética, corrige altura y centrado
+   HERO FIXES - BALANCED DESKTOP & MOBILE
    ===================================================== */
 
 .hero {
-  min-height: 75vh;
+  /* 🔧 BETTER: Responsive height that works for both */
+  min-height: 80vh; /* Good for desktop */
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, #F8F5F1 0%, #D6CDBF 100%);
   position: relative;
   overflow: hidden;
-  padding-top: 80px;
+  padding-top: 80px; /* Restored for desktop */
+  padding-bottom: 3rem; /* Increased for desktop */
 }
 
 .particleContainer {
@@ -21,55 +22,29 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  /* 🔧 BETTER: Desktop vs mobile particles */
+  opacity: 0.6; /* Good for desktop */
 }
 
 .particle {
   position: absolute;
   background: radial-gradient(circle, #F07255 0%, #ff8066 50%, transparent 100%);
   border-radius: 50%;
-  animation: float 15s linear infinite;
-  opacity: 0.7;
+  animation: float 20s linear infinite;
+  opacity: 0.4; /* Balanced opacity */
   transition: all 0.3s ease;
 }
 
-.particle:nth-child(2n) {
-  background: radial-gradient(circle, #D9A6A1 0%, #e6b3ae 50%, transparent 100%);
-}
-
-.particle:nth-child(3n) {
-  background: radial-gradient(circle, #87CEEB 0%, #98d8f0 50%, transparent 100%);
-}
-
-@keyframes float {
-  0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-  33% { transform: translateY(-10px) translateX(5px) rotate(120deg); }
-  66% { transform: translateY(5px) translateX(-5px) rotate(240deg); }
-  100% { transform: translateY(0px) translateX(0px) rotate(360deg); }
-}
-
-.connectionLine {
-  position: absolute;
-  height: 1px;
-  background: linear-gradient(90deg, #F07255, transparent, #D9A6A1);
-  transform-origin: left center;
-  animation: pulse 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.8; }
-}
-
+/* 🔧 BETTER: Responsive container */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 4rem; /* Restored spacing for desktop */
   align-items: center;
-  min-height: calc(75vh - 100px);
+  min-height: auto;
   position: relative;
   z-index: 2;
 }
@@ -79,612 +54,323 @@
   color: #242424;
 }
 
+/* 🔧 BETTER: Desktop-first title sizing */
 .title {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 1.25rem;
+  font-size: 3.5rem; /* Larger for desktop impact */
+  font-weight: 800;
+  margin-bottom: 2rem; /* More breathing room */
   background: linear-gradient(135deg, #242424 0%, #F07255 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .subtitle {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: 1.25rem; /* Larger for desktop readability */
+  margin-bottom: 3rem; /* More space */
   color: #242424;
-  opacity: 0.8;
+  opacity: 0.85;
   line-height: 1.6;
+  max-width: 85%; /* Slightly wider */
 }
 
+/* 🔧 BETTER: Desktop button spacing */
 .buttons {
   display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.primaryButton, .secondaryButton {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  font-family: 'Poppins', sans-serif;
-  position: relative;
-  overflow: hidden;
+  gap: 1.5rem; /* More space between buttons */
+  margin-bottom: 4rem; /* More space below */
 }
 
 .primaryButton {
   background: linear-gradient(135deg, #F07255, #ff8066);
   color: white;
   border: none;
-  box-shadow: 0 8px 25px rgba(240, 114, 85, 0.3);
+  padding: 1rem 2rem; /* Larger buttons for desktop */
+  font-size: 1.1rem; /* Larger text */
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 12px 35px rgba(240, 114, 85, 0.4);
+  transform: scale(1.02); /* Subtle scaling */
 }
 
 .primaryButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(240, 114, 85, 0.5);
-  background: linear-gradient(135deg, #ff8066, #F07255);
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 16px 45px rgba(240, 114, 85, 0.6);
 }
 
 .secondaryButton {
   background: transparent;
   color: #242424;
-  border: 2px solid #D9A6A1;
+  border: 2px solid #D6CDBF;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .secondaryButton:hover {
-  background: #D9A6A1;
-  color: white;
+  background: #D6CDBF;
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(217, 166, 161, 0.4);
+  box-shadow: 0 8px 25px rgba(214, 205, 191, 0.3);
 }
 
-.buttonText {
-  transition: transform 0.3s ease;
-}
-
-.primaryButton:hover .buttonText,
-.secondaryButton:hover .buttonText {
-  transform: translateX(-2px);
-}
-
-.buttonIcon {
-  transition: transform 0.3s ease;
-  font-size: 1.1rem;
-}
-
-.primaryButton:hover .buttonIcon,
-.secondaryButton:hover .buttonIcon {
-  transform: translateX(2px) scale(1.1);
-}
-
+/* 🔧 BETTER: Desktop stats spacing */
 .networkStats {
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem; /* More space for desktop */
   opacity: 0;
+  margin-bottom: 2rem;
 }
 
-.stat {
-  text-align: center;
+.statItem {
+  text-align: left;
 }
 
 .statNumber {
-  display: block;
-  font-size: 2rem;
+  font-size: 2.2rem; /* Larger for desktop impact */
   font-weight: 700;
   color: #F07255;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+  display: block;
 }
 
 .statLabel {
-  font-size: 0.9rem;
+  font-size: 0.9rem; /* Readable size */
   color: rgba(36, 36, 36, 0.7);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: block;
 }
 
+/* 🔧 BETTER: Desktop visual sizing */
 .visual {
   display: flex;
   justify-content: center;
   align-items: center;
   opacity: 0;
+  padding: 2rem; /* More space around visual */
 }
 
 .networkHub {
   position: relative;
-  width: 250px;
-  height: 250px;
+  width: 300px; /* Larger for desktop */
+  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+/* 🔧 BETTER: Network nodes for desktop */
 .centralNode {
-  position: relative;
-  width: 70px;
-  height: 70px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.nodeCore {
-  width: 50px;
-  height: 50px;
+  width: 80px; /* Larger central node */
+  height: 80px;
   background: linear-gradient(135deg, #F07255, #ff8066);
   border-radius: 50%;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 25px rgba(240, 114, 85, 0.3);
   position: relative;
   z-index: 3;
-  box-shadow: 0 0 25px rgba(240, 114, 85, 0.5);
-  animation: corePulse 2s ease-in-out infinite;
-}
-
-@keyframes corePulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(240, 114, 85, 0.6); }
-  50% { transform: scale(1.1); box-shadow: 0 0 40px rgba(240, 114, 85, 0.8); }
-}
-
-.nodeIcon {
-  font-size: 1.8rem;
-  color: white;
-  animation: iconRotate 4s linear infinite;
-}
-
-@keyframes iconRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.nodeRing {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  border: 2px solid rgba(240, 114, 85, 0.4);
-  border-radius: 50%;
-  animation: ringExpand 3s ease-in-out infinite;
-}
-
-@keyframes ringExpand {
-  0% { 
-    width: 70px; 
-    height: 70px; 
-    opacity: 1; 
-  }
-  100% { 
-    width: 140px; 
-    height: 140px; 
-    opacity: 0; 
-  }
 }
 
 .satelliteNode {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  animation: orbit 8s linear infinite;
-}
-
-@keyframes orbit {
-  from { transform: rotate(0deg) translateY(-100px) rotate(0deg); }
-  to { transform: rotate(360deg) translateY(-100px) rotate(-360deg); }
-}
-
-.satelliteCore {
-  width: 35px;
-  height: 35px;
-  background: linear-gradient(135deg, #D9A6A1, #e6b3ae);
+  width: 45px; /* Larger satellite nodes */
+  height: 45px;
+  background: linear-gradient(135deg, #D6CDBF, #E5DDD1);
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  box-shadow: 0 0 15px rgba(217, 166, 161, 0.4);
-  transition: all 0.3s ease;
+  position: absolute;
+  box-shadow: 0 4px 15px rgba(214, 205, 191, 0.3);
 }
 
-.satelliteCore:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 30px rgba(217, 166, 161, 0.8);
-}
+/* =====================================================
+   TABLET BREAKPOINT (NEW)
+   ===================================================== */
 
-/* Animations */
-.fadeInLeft {
-  animation: fadeInLeft 1s ease-out forwards;
-}
-
-.fadeInRight {
-  animation: fadeInRight 1s ease-out 0.3s forwards;
-}
-
-.fadeInUp {
-  animation: fadeInUp 1s ease-out 0.6s forwards;
-}
-
-@keyframes fadeInLeft {
-  from { 
-    opacity: 0; 
-    transform: translateX(-50px); 
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero {
+    min-height: 70vh;
+    padding-top: 60px;
   }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
-  }
-}
 
-@keyframes fadeInRight {
-  from { 
-    opacity: 0; 
-    transform: translateX(50px); 
+  .title {
+    font-size: 3rem;
   }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
-  }
-}
 
-@keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px); 
+  .subtitle {
+    font-size: 1.1rem;
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+
+  .container {
+    gap: 3rem;
+  }
+
+  .networkHub {
+    width: 250px;
+    height: 250px;
   }
 }
 
 /* =====================================================
-   RESPONSIVE DESIGN - FIXES APLICADOS
+   MOBILE OPTIMIZATIONS
    ===================================================== */
 
-@media (max-width: 1024px) {
-  .networkHub {
-    width: 220px;
-    height: 220px;
-  }
-  
-  .networkStats {
-    gap: 1.5rem;
-  }
-  
-  .title {
-    font-size: 2.8rem;
-  }
-  
-  .subtitle {
-    font-size: 1.15rem;
-  }
-}
-
-/* 🔧 FIX 1: TABLET OPTIMIZATION */
 @media (max-width: 768px) {
   .hero {
-    /* 🚀 ALTURA REDUCIDA: De 70vh a 50vh */
-    min-height: 50vh;
-    padding-top: 60px; /* Reducido de 80px */
-    padding-bottom: 2rem; /* Agregado padding bottom */
+    min-height: 60vh; /* Compact but not cramped */
+    padding-top: 40px;
+    padding-bottom: 2rem;
   }
 
   .container {
     grid-template-columns: 1fr;
     text-align: center;
-    gap: 1.5rem; /* Reducido de 2rem */
-    padding: 1rem;
-    /* 🚀 ALTURA CONTAINER REDUCIDA */
-    min-height: auto; /* Eliminado min-height fixed */
-    justify-content: center;
-  }
-
-  .content {
-    /* 🚀 CENTRADO PERFECTO */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    gap: 2rem; /* Balanced mobile spacing */
+    padding: 1.5rem;
   }
 
   .title {
-    font-size: 2rem; /* Reducido de 2.2rem */
-    line-height: 1.3; /* Mejorado de 1.2 */
-    margin-bottom: 1rem;
+    font-size: 2.2rem; /* Better mobile size */
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
   }
 
   .subtitle {
-    font-size: 1rem; /* Reducido de 1.1rem */
-    margin-bottom: 1.5rem;
-    max-width: 90%; /* Agregado max-width */
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    max-width: 100%;
   }
 
   .buttons {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
 
   .primaryButton, .secondaryButton {
     width: 100%;
-    max-width: 260px; /* Reducido de 280px */
-    justify-content: center;
-    padding: 0.875rem 1.5rem; /* Reducido padding */
-    font-size: 0.95rem; /* Reducido font-size */
-  }
-
-  .networkStats {
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 1rem; /* Agregado margin-bottom */
-  }
-
-  .statNumber {
-    font-size: 1.4rem; /* Reducido de 1.5rem */
-  }
-
-  .statLabel {
-    font-size: 0.75rem; /* Reducido de 0.8rem */
-  }
-
-  .visual {
-    margin-top: 1rem; /* Agregado margin-top */
-  }
-
-  .networkHub {
-    width: 160px; /* Reducido de 180px */
-    height: 160px;
-  }
-
-  .centralNode {
-    width: 45px; /* Reducido de 50px */
-    height: 45px;
-  }
-
-  .nodeCore {
-    width: 35px; /* Reducido de 40px */
-    height: 35px;
-  }
-
-  .nodeIcon {
-    font-size: 1.1rem; /* Reducido de 1.2rem */
-  }
-
-  .satelliteCore {
-    width: 22px; /* Reducido de 25px */
-    height: 22px;
-    font-size: 0.8rem; /* Reducido de 0.9rem */
-  }
-
-  /* 🚀 PARTÍCULAS SIMPLIFICADAS EN MÓVIL */
-  .particle {
-    width: 3px !important;
-    height: 3px !important;
-    opacity: 0.4 !important; /* Reducida opacidad */
-  }
-
-  .particleContainer {
-    opacity: 0.6; /* Reducida intensidad general */
-  }
-}
-
-/* 🔧 FIX 2: MOBILE SMALL OPTIMIZATION */
-@media (max-width: 480px) {
-  .hero {
-    /* 🚀 ALTURA MÓVIL PEQUEÑO: Aún más compacta */
-    min-height: 45vh;
-    padding-top: 40px; /* Reducido de 60px */
-    padding-bottom: 1.5rem;
-  }
-
-  .container {
-    gap: 1rem; /* Reducido de 1.5rem */
-    padding: 0.75rem; /* Reducido de 1rem */
-  }
-
-  .title {
-    font-size: 1.75rem; /* Reducido de 1.9rem */
-    margin-bottom: 0.75rem; /* Reducido de 1rem */
-  }
-
-  .subtitle {
-    font-size: 0.9rem; /* Reducido de 1rem */
-    margin-bottom: 1rem;
-    line-height: 1.5;
-    max-width: 95%;
-  }
-
-  .buttons {
-    margin-bottom: 1rem; /* Reducido de 1.5rem */
-    gap: 0.75rem; /* Reducido de 1rem */
-  }
-
-  .primaryButton, .secondaryButton {
-    max-width: 240px; /* Reducido de 260px */
-    padding: 0.75rem 1.25rem; /* Reducido padding */
-    font-size: 0.9rem; /* Reducido font-size */
-  }
-
-  .networkHub {
-    width: 120px; /* Reducido de 140px */
-    height: 120px;
-  }
-
-  .centralNode {
-    width: 35px; /* Reducido de 40px */
-    height: 35px;
-  }
-
-  .nodeCore {
-    width: 28px; /* Reducido de 32px */
-    height: 28px;
-  }
-
-  .nodeIcon {
-    font-size: 0.9rem; /* Reducido de 1rem */
-  }
-
-  .satelliteCore {
-    width: 18px; /* Reducido de 20px */
-    height: 18px;
-    font-size: 0.7rem; /* Reducido de 0.8rem */
-  }
-
-  .nodeRing {
-    width: 35px; /* Reducido de 40px */
-    height: 35px;
-  }
-
-  .networkStats {
-    flex-direction: row;
-    gap: 0.5rem;
-    justify-content: space-around;
-    margin-bottom: 0.5rem; /* Reducido */
-  }
-
-  .stat {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .statNumber {
-    font-size: 1.1rem; /* Reducido de 1.2rem */
-  }
-
-  .statLabel {
-    font-size: 0.65rem; /* Reducido de 0.7rem */
-    line-height: 1.2;
-  }
-
-  .satelliteNode {
-    width: 18px; /* Reducido de 20px */
-    height: 18px;
-  }
-
-  /* 🚀 PARTÍCULAS MÁS SUTILES EN MÓVILES PEQUEÑOS */
-  .particle {
-    width: 2px !important;
-    height: 2px !important;
-    opacity: 0.3 !important;
-  }
-
-  .particleContainer {
-    opacity: 0.4; /* Más sutil */
-  }
-
-  .connectionLine {
-    opacity: 0.2 !important; /* Líneas más sutiles */
-  }
-}
-
-/* 🔧 FIX 3: EXTRA SMALL MOBILE (iPhone SE, etc.) */
-@media (max-width: 375px) {
-  .hero {
-    min-height: 40vh;
-    padding-top: 30px;
-    padding-bottom: 1rem;
-  }
-
-  .title {
-    font-size: 1.6rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .subtitle {
-    font-size: 0.85rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .buttons {
-    gap: 0.5rem;
-  }
-
-  .primaryButton, .secondaryButton {
-    max-width: 200px;
-    padding: 0.625rem 1rem;
-    font-size: 0.85rem;
-  }
-
-  .networkHub {
-    width: 100px;
-    height: 100px;
-  }
-
-  .networkStats {
-    gap: 0.25rem;
-  }
-
-  .statNumber {
+    max-width: 280px;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
   }
 
+  .networkStats {
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .statNumber {
+    font-size: 1.6rem;
+  }
+
   .statLabel {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .visual {
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+
+  .networkHub {
+    width: 180px;
+    height: 180px;
+  }
+
+  .centralNode {
+    width: 60px;
+    height: 60px;
+  }
+
+  .satelliteNode {
+    width: 35px;
+    height: 35px;
+  }
+
+  /* Mobile particles adjustment */
+  .particleContainer {
+    opacity: 0.3; /* Visible but not distracting */
+  }
+
+  .particle {
+    opacity: 0.25;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 55vh;
+    padding-top: 30px;
+  }
+
+  .title {
+    font-size: 1.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .buttons {
+    margin-bottom: 1.5rem;
+  }
+
+  .networkHub {
+    width: 150px;
+    height: 150px;
+  }
+
+  .centralNode {
+    width: 50px;
+    height: 50px;
+  }
+
+  .satelliteNode {
+    width: 28px;
+    height: 28px;
   }
 }
 
 /* =====================================================
-   PERFORMANCE & ACCESSIBILITY - TU CÓDIGO ORIGINAL
+   LARGE DESKTOP OPTIMIZATION
    ===================================================== */
 
-/* Performance optimizations */
-.particle, .connectionLine, .satelliteNode {
-  will-change: transform;
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .particle, .connectionLine, .nodeRing, .satelliteNode, .nodeIcon {
-    animation: none;
-  }
-  
-  .nodeCore {
-    animation: none;
+@media (min-width: 1440px) {
+  .hero {
+    min-height: 85vh; /* Even more impactful on large screens */
   }
 
-  /* 🚀 OPTIMIZACIÓN: Fallback para animaciones reducidas */
-  .particle {
-    opacity: 0.2 !important;
+  .title {
+    font-size: 4rem; /* Bigger impact on large screens */
   }
-}
 
-/* 🔧 FIX 4: SAFE AREA SUPPORT (iPhone X+) */
-@supports (padding: max(0px)) {
-  @media (max-width: 768px) {
-    .hero {
-      padding-top: max(60px, env(safe-area-inset-top));
-      padding-bottom: max(2rem, env(safe-area-inset-bottom));
-    }
+  .subtitle {
+    font-size: 1.3rem;
   }
-  
-  @media (max-width: 480px) {
-    .hero {
-      padding-top: max(40px, env(safe-area-inset-top));
-      padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
-    }
-  }
-}
 
-/* 🔧 FIX 5: TOUCH OPTIMIZATION */
-@media (max-width: 768px) {
-  .primaryButton, .secondaryButton {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-    touch-action: manipulation;
+  .container {
+    gap: 5rem; /* More space on large screens */
   }
-}
 
-/* 🔧 FIX 6: FOCUS STATES FOR ACCESSIBILITY */
-.primaryButton:focus,
-.secondaryButton:focus {
-  outline: 2px solid #F07255;
-  outline-offset: 2px;
+  .networkHub {
+    width: 350px; /* Larger visual element */
+    height: 350px;
+  }
+
+  .centralNode {
+    width: 90px;
+    height: 90px;
+  }
+
+  .satelliteNode {
+    width: 50px;
+    height: 50px;
+  }
 }
