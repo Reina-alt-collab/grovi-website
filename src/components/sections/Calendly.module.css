@@ -650,7 +650,8 @@
     animation: none;
   }
   
-  * {
+  /* Fixed for CSS Modules */
+  :global(*) {
     transition: none !important;
     animation: none !important;
   }
