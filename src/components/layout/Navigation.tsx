@@ -1,5 +1,12 @@
 'use client'
 
+// Type for gtag function
+declare global {
+  interface Window {
+    gtag: (command: string, targetId: string, config?: Record<string, unknown>) => void;
+  }
+}
+
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from './Navigation.module.css'
@@ -10,6 +17,7 @@ export default function Navigation() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
 
+  
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
@@ -65,8 +73,8 @@ export default function Navigation() {
       closeMobileMenu()
       
       // Track navigation clicks
-      if (typeof window !== 'undefined' && (window as any).gtag) {
-        (window as any).gtag('event', 'navigation_click', {
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'navigation_click', {
           event_category: 'Navigation',
           event_label: targetId,
           section: targetId
@@ -77,8 +85,8 @@ export default function Navigation() {
 
   const handleCTAClick = () => {
     // Track CTA clicks
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'cta_click', {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'cta_click', {
         event_category: 'Navigation',
         event_label: 'agendar_llamada',
         section: 'navigation'

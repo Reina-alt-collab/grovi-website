@@ -3,6 +3,13 @@
 import { useState, useEffect } from 'react'
 import styles from './CookieBanner.module.css'
 
+// Type for gtag function
+declare global {
+  interface Window {
+    gtag: (command: string, targetId: string, config?: Record<string, unknown>) => void;
+  }
+}
+
 export default function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false)
 
@@ -20,9 +27,9 @@ export default function CookieBanner() {
   const grantAnalyticsConsent = () => {
     // Check if gtag is available and is a function
     if (typeof window !== 'undefined' && 
-        typeof (window as any).gtag === 'function') {
+        typeof window.gtag === 'function') {
       try {
-        (window as any).gtag('consent', 'update', {
+        window.gtag('consent', 'update', {
           'analytics_storage': 'granted',
           'ad_storage': 'granted'
         })
@@ -32,9 +39,9 @@ export default function CookieBanner() {
     } else {
       // If gtag isn't ready yet, try again after a short delay
       setTimeout(() => {
-        if (typeof (window as any).gtag === 'function') {
+        if (typeof window.gtag === 'function') {
           try {
-            (window as any).gtag('consent', 'update', {
+            window.gtag('consent', 'update', {
               'analytics_storage': 'granted',
               'ad_storage': 'granted'
             })

@@ -105,7 +105,8 @@ export default function ContactForm({ onFormSubmit, onCTAClick }: ContactFormPro
       setShowSuccess(true)
       setFormData({ firstName: '', lastName: '', email: '', phone: '', company: '', subject: '', message: '' })
       setErrors({})
-    } catch (error) {
+     
+    } catch {
       setShowError(true)
     } finally {
       setIsSubmitting(false)

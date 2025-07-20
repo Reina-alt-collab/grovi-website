@@ -152,12 +152,11 @@ export default function CaseStudies({ onCTAClick }: CaseStudiesProps) {
             {/* Testimonial */}
             <blockquote className={styles.testimonial}>
               <p>
-                "Grovi transformó completamente nuestra estrategia de negocio. Los resultados 
-                superaron nuestras expectativas y ahora tenemos un crecimiento sostenible."
+                &quot;Grovi nos ayudó a aumentar nuestras ventas en un 40%&quot;
               </p>
               <cite>
                 <strong>María González</strong><br />
-                <span>CEO, TechFlow Solutions</span>
+                <span>CEO, TechPet Solutions</span>
               </cite>
             </blockquote>
             
