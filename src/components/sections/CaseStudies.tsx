@@ -122,15 +122,15 @@ export default function CaseStudies({ onCTAClick }: CaseStudiesProps) {
                 <span>TF</span>
               </div>
               <div className={styles.clientDetails}>
-                <h4>TechFlow Solutions</h4>
-                <p>Empresa de consultoría tecnológica</p>
+                <h4>TechPet Solutions</h4>
+                <p>Soluciones tecnológicas para mascotas</p>
               </div>
             </div>
             
             <p className={styles.caseStudyDescription}>
-              Ayudamos a una empresa de tecnología a reestructurar su estrategia de marketing 
-              digital y optimizar sus procesos de ventas, resultando en un incremento del 40% 
-              en sus ingresos en solo 6 meses.
+              Ayudamos a TechPet, una empresa especializada en soluciones tecnológicas para mascotas, 
+              a reestructurar su estrategia de marketing digital y optimizar sus procesos de ventas, 
+              resultando en un incremento del 40% en sus ingresos en solo 6 meses.
             </p>
             
             {/* Additional Metrics */}
@@ -152,7 +152,7 @@ export default function CaseStudies({ onCTAClick }: CaseStudiesProps) {
             {/* Testimonial */}
             <blockquote className={styles.testimonial}>
               <p>
-                &quot;Grovi nos ayudó a aumentar nuestras ventas en un 40%&quot;
+                &quot;Grovi nos ayudó a aumentar nuestras ventas en un 40%, después de haber probado varias agencias de marketing.&quot;
               </p>
               <cite>
                 <strong>María González</strong><br />
