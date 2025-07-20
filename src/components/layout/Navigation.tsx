@@ -1,268 +1,270 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-
-const navItems = [
-  { label: 'Sobre Nosotros', href: '#sobre-nosotros' },
-  { label: 'Casos de Éxito', href: '#casos-de-exito' },
-  { label: 'Contacto', href: '#contacto' },
-]
+import styles from './Navigation.module.css'
 
 export default function Navigation() {
-  const [scrolled, setScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50)
+      const currentScrollY = window.scrollY
+
+      // Add scrolled class for background change
+      setIsScrolled(currentScrollY > 50)
+
+      // Hide/show navigation on scroll (optional UX enhancement)
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false) // Hide when scrolling down
+      } else {
+        setIsVisible(true) // Show when scrolling up
+      }
+
+      setLastScrollY(currentScrollY)
     }
 
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [lastScrollY])
 
-    handleResize()
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
+    
+    // Prevent body scroll when mobile menu is open
+    if (!isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
     }
-  }, [])
-
-  const handleNavClick = (href: string) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      })
-    }
-    setMobileMenuOpen(false)
   }
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false)
+    document.body.style.overflow = 'unset'
+  }
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute('href')
+    if (href?.startsWith('#')) {
+      e.preventDefault()
+      const targetId = href.substring(1)
+      const targetElement = document.getElementById(targetId)
+      
+      if (targetElement) {
+        const offsetTop = targetElement.offsetTop - 70 // Account for fixed navbar height
+        window.scrollTo({
+          top: offsetTop,
+          behavior: 'smooth'
+        })
+      }
+      
+      closeMobileMenu()
+      
+      // Track navigation clicks
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'navigation_click', {
+          event_category: 'Navigation',
+          event_label: targetId,
+          section: targetId
+        })
+      }
+    }
+  }
+
+  const handleCTAClick = () => {
+    // Track CTA clicks
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'cta_click', {
+        event_category: 'Navigation',
+        event_label: 'agendar_llamada',
+        section: 'navigation'
+      })
+    }
+  }
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element
+      if (isMobileMenuOpen && !target.closest(`.${styles.navigation}`)) {
+        closeMobileMenu()
+      }
+    }
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('click', handleClickOutside)
+      return () => document.removeEventListener('click', handleClickOutside)
+    }
+  }, [isMobileMenuOpen])
+
+  // Close mobile menu on escape key
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isMobileMenuOpen) {
+        closeMobileMenu()
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [isMobileMenuOpen])
+
   return (
-    <>
-      <nav
-        style={{
-          position: 'fixed',
-          top: 0,
-          width: '100%',
-          background: scrolled ? 'rgba(248, 245, 241, 0.98)' : 'rgba(248, 245, 241, 0.95)',
-          backdropFilter: 'blur(10px)',
-          borderBottom: '1px solid rgba(217, 166, 161, 0.1)',
-          zIndex: 1000,
-          transition: 'all 0.3s ease',
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '1200px',
-            margin: '0 auto',
-            display: 'flex',
-            height: '60px',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0 2rem',
-          }}
-        >
-          {/* Logo */}
-<div>
-  {/* Logo de Grovi */}
-  <Image 
-    src="/grovi-logo-removebg.png" 
-    alt="Logo de Grovi" 
-    width={100}
-    height={33}
-    priority
-  />
-</div>
-
-          {/* Desktop Menu */}
-          {!isMobile && (
-            <div style={{ display: 'flex', gap: '2rem' }}>
-              {navItems.map((item) => (
-                <div
-                  key={item.href}
-                  style={{
-                    fontWeight: '500',
-                    color: '#242424',
-                    cursor: 'pointer',
-                    position: 'relative',
-                    padding: '0.5rem 0',
-                  }}
-                  onClick={() => handleNavClick(item.href)}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#F07255'
-                    const underline = e.currentTarget.querySelector('.nav-underline') as HTMLElement
-                    if (underline) underline.style.width = '100%'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#242424'
-                    const underline = e.currentTarget.querySelector('.nav-underline') as HTMLElement
-                    if (underline) underline.style.width = '0'
-                  }}
-                >
-                  {item.label}
-                  <div
-                    className="nav-underline"
-                    style={{
-                      position: 'absolute',
-                      bottom: '-5px',
-                      left: 0,
-                      width: '0',
-                      height: '2px',
-                      background: '#F07255',
-                      transition: 'width 0.3s ease',
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
-
-          {/* CTA Button / Mobile Menu */}
-          {!isMobile ? (
-            <button
-              style={{
-                background: 'linear-gradient(135deg, #F07255, #ff8066)',
-                color: 'white',
-                borderRadius: '50px',
-                fontWeight: '600',
-                padding: '0.75rem 1.5rem',
-                border: 'none',
-                cursor: 'pointer',
-                boxShadow: '0 4px 15px rgba(240, 114, 85, 0.3)',
-                transition: 'all 0.3s ease',
-                fontSize: '14px',
-              }}
-              onClick={() => handleNavClick('#agendar')}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)'
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(240, 114, 85, 0.4)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)'
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(240, 114, 85, 0.3)'
-              }}
-            >
-              Agendar Llamada
-            </button>
-          ) : (
-            <div
-              style={{
-                cursor: 'pointer',
-                padding: '0.5rem',
-              }}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              <div>
-                <div
-                  style={{
-                    width: '25px',
-                    height: '3px',
-                    background: '#242424',
-                    marginBottom: '3px',
-                    transition: 'all 0.3s ease',
-                    transform: mobileMenuOpen ? 'rotate(45deg) translate(5px, 5px)' : 'none',
-                  }}
-                />
-                <div
-                  style={{
-                    width: '25px',
-                    height: '3px',
-                    background: '#242424',
-                    marginBottom: '3px',
-                    transition: 'all 0.3s ease',
-                    opacity: mobileMenuOpen ? 0 : 1,
-                  }}
-                />
-                <div
-                  style={{
-                    width: '25px',
-                    height: '3px',
-                    background: '#242424',
-                    transition: 'all 0.3s ease',
-                    transform: mobileMenuOpen ? 'rotate(-45deg) translate(7px, -6px)' : 'none',
-                  }}
-                />
-              </div>
-            </div>
-          )}
+    <nav 
+      className={`${styles.navigation} ${isScrolled ? styles.scrolled : ''} ${isVisible ? styles.visible : styles.hidden}`}
+      role="navigation" 
+      aria-label="Navegación principal"
+    >
+      <div className={styles.navContainer}>
+        {/* Logo */}
+        <div className={styles.logoContainer}>
+          <Image
+            src="/grovi-logo-removebg.png"
+            alt="Logo de Grovi"
+            width={120}
+            height={35}
+            className={styles.logo}
+            priority
+            sizes="120px"
+            quality={90}
+          />
         </div>
 
-        {/* Mobile Menu */}
-        {isMobile && (
-          <div
-            style={{
-              maxHeight: mobileMenuOpen ? '400px' : '0',
-              overflow: 'hidden',
-              transition: 'max-height 0.3s ease',
-              background: '#F8F5F1',
-              borderTop: mobileMenuOpen ? '1px solid rgba(217, 166, 161, 0.2)' : 'none',
-              boxShadow: mobileMenuOpen ? '0 5px 15px rgba(0,0,0,0.1)' : 'none',
-            }}
-          >
-            <div
-              style={{
-                maxWidth: '1200px',
-                margin: '0 auto',
-                display: 'flex',
-                flexDirection: 'column',
-                padding: mobileMenuOpen ? '1.5rem 2rem' : '0 2rem',
-                gap: mobileMenuOpen ? '1rem' : '0',
-                transition: 'all 0.3s ease',
-              }}
+        {/* Desktop Navigation Menu */}
+        <ul className={`${styles.navMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`} role="menubar">
+          <li role="none">
+            <a 
+              href="#sobre-nosotros" 
+              className={styles.navLink}
+              onClick={handleNavClick}
+              role="menuitem"
+              tabIndex={isMobileMenuOpen ? 0 : undefined}
             >
-              {navItems.map((item) => (
-                <div
-                  key={item.href}
-                  style={{
-                    fontSize: '18px',
-                    fontWeight: '500',
-                    textAlign: 'center',
-                    padding: '0.5rem',
-                    color: '#242424',
-                    cursor: 'pointer',
-                    borderRadius: '8px',
-                    transition: 'all 0.3s ease',
-                  }}
-                  onClick={() => handleNavClick(item.href)}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#F07255'
-                    e.currentTarget.style.background = 'rgba(240, 114, 85, 0.1)'
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#242424'
-                    e.currentTarget.style.background = 'transparent'
-                  }}
-                >
-                  {item.label}
-                </div>
-              ))}
-              <button
-                style={{
-                  background: 'linear-gradient(135deg, #F07255, #ff8066)',
-                  color: 'white',
-                  borderRadius: '50px',
-                  fontWeight: '600',
-                  marginTop: '1rem',
-                  padding: '0.75rem 1.5rem',
-                  border: 'none',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 15px rgba(240, 114, 85, 0.3)',
-                  transition: 'all 0.3s ease',
-                }}
-                onClick={() => handleNavClick('#agendar')}
-              >
-                Agendar Llamada
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
-    </>
+              Sobre Nosotros
+            </a>
+          </li>
+          <li role="none">
+            <a 
+              href="#casos-de-exito" 
+              className={styles.navLink}
+              onClick={handleNavClick}
+              role="menuitem"
+              tabIndex={isMobileMenuOpen ? 0 : undefined}
+            >
+              Casos de Éxito
+            </a>
+          </li>
+          <li role="none">
+            <a 
+              href="#contacto" 
+              className={styles.navLink}
+              onClick={handleNavClick}
+              role="menuitem"
+              tabIndex={isMobileMenuOpen ? 0 : undefined}
+            >
+              Contacto
+            </a>
+          </li>
+          <li role="none" className={styles.mobileCtaItem}>
+            <a 
+              href="#agendar" 
+              className={`${styles.navCta} ${styles.mobileCtaButton}`}
+              onClick={(e) => {
+                handleNavClick(e)
+                handleCTAClick()
+              }}
+              role="menuitem"
+              tabIndex={isMobileMenuOpen ? 0 : undefined}
+              aria-label="Agendar una llamada gratuita con Grovi"
+            >
+              Agendar Llamada
+            </a>
+          </li>
+        </ul>
+
+        {/* Desktop CTA Button */}
+        <a 
+          href="#agendar" 
+          className={`${styles.navCta} ${styles.desktopCta}`}
+          onClick={(e) => {
+            handleNavClick(e)
+            handleCTAClick()
+          }}
+          role="button"
+          aria-label="Agendar una llamada gratuita con Grovi"
+        >
+          Agendar Llamada
+        </a>
+
+        {/* Mobile Menu Toggle */}
+        <button 
+          className={`${styles.mobileToggle} ${isMobileMenuOpen ? styles.active : ''}`}
+          onClick={toggleMobileMenu}
+          aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
+          type="button"
+        >
+          <span className={styles.hamburgerLine}></span>
+          <span className={styles.hamburgerLine}></span>
+          <span className={styles.hamburgerLine}></span>
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div 
+          className={styles.mobileOverlay}
+          onClick={closeMobileMenu}
+          aria-hidden="true"
+        />
+      )}
+    </nav>
   )
+}
+
+// Hook for navigation state management
+export function useNavigation() {
+  const [activeSection, setActiveSection] = useState('')
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('section[id]')
+    const navHeight = 80
+
+    const observerOptions = {
+      root: null,
+      rootMargin: `-${navHeight}px 0px -50% 0px`,
+      threshold: 0.1
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id)
+        }
+      })
+    }, observerOptions)
+
+    sections.forEach((section) => observer.observe(section))
+
+    return () => observer.disconnect()
+  }, [])
+
+  return { activeSection }
+}
+
+// Utility function for smooth scroll with offset
+export function scrollToSection(sectionId: string, offset: number = 70) {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    const elementTop = element.offsetTop - offset
+    window.scrollTo({
+      top: elementTop,
+      behavior: 'smooth'
+    })
+  }
 }

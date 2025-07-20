@@ -1,904 +1,637 @@
-/* =====================================================
-   CALENDLY SECTION - COMPLETE CSS MATCHING Calendly.tsx
-   ===================================================== */
+/* =================================
+   CASE STUDIES SECTION STYLES
+================================= */
 
-.calendly {
-  background: white;
-  padding: 6rem 0;
-  position: relative;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 3rem;
-  opacity: 0;
-}
-
-.title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #242424;
-}
-
-.subtitle {
-  font-size: 1.1rem;
-  color: #242424;
-  opacity: 0.7;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.calendlyContainer {
-  text-align: center;
-  margin-bottom: 4rem;
-  opacity: 0;
-  position: relative;
-}
-
-/* =====================================================
-   DESKTOP CALENDLY WIDGET
-   ===================================================== */
-
-.desktopCalendlyWrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.calendlyWidget {
-  max-width: 800px;
-  width: 100%;
-  height: 700px;
-  background: #F8F5F1;
-  border-radius: 20px;
-  padding: 1.5rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+.caseStudies {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--beige) 100%);
   position: relative;
   overflow: hidden;
-  border: 2px solid rgba(217, 166, 161, 0.2);
-  margin: 0 auto;
 }
 
-.widgetWrapper {
+.caseStudies::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 100%;
   height: 100%;
-  position: relative;
-  border-radius: 15px;
-  overflow: hidden;
+  background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='none'/%3E%3Cpath d='M20 20h60v60H20z' fill='%23ffffff' fill-opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-.widgetOverlay {
+.sectionHeader {
+  position: relative;
+  z-index: 2;
+}
+
+/* Main Case Study Card */
+.caseStudyCard {
+  background: white;
+  border-radius: var(--border-radius-large);
+  padding: 3rem;
+  box-shadow: var(--shadow-heavy);
+  transition: all 0.8s ease;
+  opacity: 0;
+  transform: translateY(50px);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  margin-bottom: 4rem;
+}
+
+.caseStudyCard::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  border-radius: 15px;
-  box-shadow: inset 0 0 0 1px rgba(217, 166, 161, 0.1);
-  z-index: 1;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
 }
 
-/* =====================================================
-   MOBILE CALENDLY CARD
-   ===================================================== */
-
-.mobileCalendlyWrapper {
-  display: flex;
-  justify-content: center;
-  padding: 0 1rem;
-  width: 100%;
+.caseStudyCard.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.mobileCalendlyCard {
-  background: #F8F5F1;
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  max-width: 420px;
-  width: 100%;
+.caseStudyCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Success Metric Display */
+.metricContainer {
   text-align: center;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-  border: 2px solid rgba(217, 166, 161, 0.2);
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--off-white);
   position: relative;
-  overflow: hidden;
-  margin: 0 auto;
 }
 
-.calendarIcon {
-  font-size: 3.5rem;
-  margin-bottom: 1.5rem;
-  display: block;
-  color: #F07255;
-}
-
-.mobileCalendlyTitle {
-  font-size: 1.6rem;
+.caseStudyNumber {
+  font-size: 4rem;
   font-weight: 700;
-  color: #242424;
-  margin-bottom: 0.75rem;
-  line-height: 1.3;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(240, 114, 85, 0.2);
+  animation: numberPulse 3s ease-in-out infinite;
 }
 
-.callDuration {
-  background: linear-gradient(135deg, #F07255, #ff8066);
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
-  font-size: 1rem;
+@keyframes numberPulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+}
+
+.metricLabel {
+  font-size: 1.5rem;
   font-weight: 600;
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 4px 15px rgba(240, 114, 85, 0.3);
+  margin-top: 0.5rem;
+  color: var(--base);
+  position: relative;
 }
 
-.mobileCalendlyDescription {
-  font-size: 1.05rem;
-  color: #242424;
-  opacity: 0.8;
-  line-height: 1.6;
-  margin-bottom: 2.5rem;
+.metricLabel::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  border-radius: 2px;
 }
 
-.mobileFeatures {
-  margin-bottom: 2.5rem;
-  text-align: left;
+/* Case Study Content */
+.caseStudyContent {
+  display: grid;
+  gap: 2rem;
 }
 
-.feature {
+.caseStudyTitle {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--base);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* Client Information */
+.clientInfo {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.25rem;
-  font-size: 1rem;
-  color: #242424;
-  opacity: 0.85;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--off-white);
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
 }
 
-.featureIcon {
-  font-size: 1.2rem;
-  flex-shrink: 0;
-  color: #F07255;
-}
-
-.mobileCalendlyButton {
-  background: linear-gradient(135deg, #F07255, #ff8066);
-  color: white;
-  border: none;
-  padding: 1.2rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 25px rgba(240, 114, 85, 0.35);
-  width: 100%;
-  margin-bottom: 2rem;
+.clientLogo {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: var(--border-radius);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  min-height: 52px;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-  overflow: hidden;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(217, 166, 161, 0.3);
 }
 
-.mobileCalendlyButton:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(240, 114, 85, 0.45);
-}
-
-.mobileCalendlyButton:active {
-  transform: translateY(-1px);
-}
-
-.buttonText {
-  line-height: 1;
-  font-weight: 600;
-}
-
-.buttonIcon {
+.clientDetails h4 {
   font-size: 1.2rem;
-  line-height: 1;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  color: var(--base);
 }
 
-.mobileInfo {
+.clientDetails p {
+  color: var(--base);
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+/* Case Study Description */
+.caseStudyDescription {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--base);
+  opacity: 0.8;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+/* Additional Metrics */
+.additionalMetrics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin-top: 1.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(217, 166, 161, 0.3);
+  margin: 2rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--off-white) 0%, rgba(217, 166, 161, 0.1) 100%);
+  border-radius: var(--border-radius);
 }
 
-.infoItem {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
+.metricItem {
+  text-align: center;
+  padding: 1rem;
+  background: white;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(217, 166, 161, 0.1);
+}
+
+.metricItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(217, 166, 161, 0.2);
+}
+
+.metricValue {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.metricText {
   font-size: 0.9rem;
-  color: #242424;
+  color: var(--base);
   opacity: 0.8;
-  text-align: center;
+  font-weight: 500;
+  line-height: 1.3;
 }
 
-.infoIcon {
-  font-size: 1.4rem;
-  margin-bottom: 0.25rem;
-  color: #F07255;
+/* Testimonial */
+.testimonial {
+  background: linear-gradient(135deg, var(--primary) 0%, rgba(217, 166, 161, 0.1) 100%);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  margin: 2rem 0;
+  border-left: 4px solid var(--accent);
+  position: relative;
 }
 
-/* =====================================================
-   LOADING & ERROR STATES
-   ===================================================== */
-
-.loadingFallback {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-height: 400px;
-  text-align: center;
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, #f8f5f1 0%, #ffffff 100%);
-  border-radius: 15px;
-}
-
-.loadingSpinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid #D9A6A1;
-  border-top: 4px solid #F07255;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin-bottom: 2rem;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.loadingFallback h3 {
-  color: #242424;
-  margin-bottom: 1rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
-.loadingFallback p {
-  color: #242424;
-  opacity: 0.7;
-  margin-bottom: 2rem;
-  font-size: 1.05rem;
-  max-width: 400px;
-}
-
-.loadingFeatures {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1rem;
-  max-width: 300px;
-}
-
-.loadingFeature {
-  font-size: 0.95rem;
-  color: #242424;
-  opacity: 0.6;
-  text-align: center;
-  padding: 0.5rem;
-  background: rgba(240, 114, 85, 0.05);
-  border-radius: 8px;
-}
-
-.errorFallback {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  min-height: 450px;
-  text-align: center;
-  padding: 3rem 2rem;
-  background: linear-gradient(135deg, #f8f5f1 0%, #ffffff 100%);
-  border-radius: 15px;
-}
-
-.errorIcon {
+.testimonial::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 20px;
   font-size: 4rem;
-  margin-bottom: 1.5rem;
-  color: #F07255;
+  color: var(--accent);
+  opacity: 0.3;
+  font-family: serif;
+  line-height: 1;
 }
 
-.errorFallback h3 {
-  color: #242424;
+.testimonial p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--base);
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-style: italic;
+  position: relative;
+  z-index: 2;
+}
+
+.testimonial cite {
+  display: block;
+  text-align: right;
+  font-style: normal;
+  opacity: 0.8;
+}
+
+.testimonial cite strong {
+  color: var(--base);
   font-weight: 600;
 }
 
-.errorFallback p {
-  color: #242424;
+.testimonial cite span {
+  display: block;
+  font-size: 0.9rem;
   opacity: 0.7;
-  margin-bottom: 2rem;
-  font-size: 1.05rem;
-  max-width: 400px;
-  line-height: 1.6;
+  margin-top: 0.25rem;
 }
 
-.errorActions {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  width: 100%;
-  max-width: 350px;
+/* CTA Container */
+.ctaContainer {
+  text-align: center;
+  margin-top: 2rem;
 }
 
-.retryButton {
-  background: linear-gradient(135deg, #F07255, #ff8066);
-  color: white;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
-  min-height: 48px;
-}
-
-.retryButton:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(240, 114, 85, 0.4);
-}
-
-.retryButton:disabled {
-  background: #D9A6A1;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-  opacity: 0.6;
-}
-
-.fallbackButton {
-  background: linear-gradient(135deg, #F07255, #ff8066);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
+.ctaButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  font-size: 1rem;
-}
-
-.fallbackButton:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(240, 114, 85, 0.4);
-  text-decoration: none;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, var(--accent), #ff8066);
   color: white;
-}
-
-.contactAlternative {
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(217, 166, 161, 0.3);
-  width: 100%;
-}
-
-.contactAlternative p {
-  margin-bottom: 1rem;
-  font-weight: 600;
-  color: #242424;
-}
-
-.emailLink, .phoneLink {
-  display: block;
-  color: #F07255;
   text-decoration: none;
+  border-radius: 50px;
   font-weight: 600;
-  margin: 0.5rem 0;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.emailLink:hover, .phoneLink:hover {
-  background: rgba(240, 114, 85, 0.1);
-  transform: translateY(-1px);
-}
-
-/* =====================================================
-   BENEFITS SECTION
-   ===================================================== */
-
-.benefits {
-  margin-bottom: 3rem;
-  opacity: 0;
-}
-
-.benefitsTitle {
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
-  color: #242424;
-}
-
-.benefitsList {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.benefit {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: #F8F5F1;
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-
-.benefit:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(217, 166, 161, 0.2);
-}
-
-.benefitIcon {
-  font-size: 2.5rem;
-  flex-shrink: 0;
-}
-
-.benefitContent h4 {
+  transition: var(--transition);
+  box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
+  border: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.1rem;
-  font-weight: 600;
-  color: #242424;
-  margin-bottom: 0.5rem;
+  min-height: 52px;
+  position: relative;
+  overflow: hidden;
 }
 
-.benefitContent p {
-  font-size: 0.95rem;
-  color: #242424;
-  opacity: 0.7;
-  line-height: 1.5;
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
 }
 
-/* =====================================================
-   GUARANTEE SECTION
-   ===================================================== */
+.ctaButton:hover::before {
+  left: 100%;
+}
 
-.guarantee {
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(240, 114, 85, 0.4);
+}
+
+.ctaButton:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Process Section */
+.processSection {
+  margin-top: 4rem;
   opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.3s;
+  position: relative;
+  z-index: 2;
 }
 
-.guaranteeContent {
+.processSection.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.processTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--base);
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.processTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  border-radius: 2px;
+}
+
+.processSteps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.processStep {
+  background: white;
+  padding: 2rem 1.5rem;
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(217, 166, 161, 0.1);
+}
+
+.processStep:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(217, 166, 161, 0.2);
+}
+
+.stepNumber {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  color: white;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  background: linear-gradient(135deg, #D9A6A1, #D6CDBF);
-  padding: 2rem;
-  border-radius: 20px;
-  text-align: center;
-  max-width: 600px;
-  margin: 0 auto;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  z-index: 2;
 }
 
-.guaranteeIcon {
-  font-size: 2.5rem;
-  flex-shrink: 0;
+.stepNumber::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  border-radius: 50%;
+  opacity: 0.2;
+  z-index: -1;
 }
 
-.guaranteeText {
-  color: #242424;
-}
-
-.guaranteeTitle {
-  font-size: 1.2rem;
+.stepContent h4 {
+  font-size: 1.1rem;
   font-weight: 600;
-  color: #242424;
-  margin-bottom: 0.5rem;
+  color: var(--base);
+  margin-bottom: 0.75rem;
 }
 
-.guaranteeDescription {
-  color: #242424;
+.stepContent p {
+  font-size: 0.9rem;
+  color: var(--base);
   opacity: 0.8;
-  line-height: 1.5;
-  margin: 0;
+  line-height: 1.6;
 }
 
-/* =====================================================
-   ANIMATIONS
-   ===================================================== */
-
-.fadeIn {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.fadeInUp {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-@keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(40px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-/* =====================================================
-   RESPONSIVE VISIBILITY LOGIC
-   ===================================================== */
-
-/* Desktop: Show widget, hide mobile card */
-@media (min-width: 769px) {
-  .desktopCalendlyWrapper {
-    display: flex;
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .caseStudyCard {
+    padding: 2.5rem 2rem;
   }
   
-  .mobileCalendlyWrapper {
-    display: none;
+  .caseStudyNumber {
+    font-size: 3.5rem;
+  }
+  
+  .additionalMetrics {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .processSteps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
 }
 
-/* Mobile/Tablet: Show mobile card, hide widget */
 @media (max-width: 768px) {
-  .desktopCalendlyWrapper {
-    display: none;
+  .caseStudyCard {
+    padding: 2rem 1.5rem;
+    margin-bottom: 3rem;
   }
   
-  .mobileCalendlyWrapper {
-    display: flex;
+  .caseStudyNumber {
+    font-size: 2.8rem;
   }
   
-  .calendly {
-    padding: 4rem 0;
+  .metricLabel {
+    font-size: 1.2rem;
   }
   
-  .title {
-    font-size: 2.2rem;
-  }
-  
-  .subtitle {
-    font-size: 1.05rem;
-    padding: 0 1rem;
-  }
-  
-  .benefitsTitle {
+  .caseStudyTitle {
     font-size: 1.5rem;
   }
   
-  .benefitsList {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  .benefit {
-    padding: 1rem;
+  .clientInfo {
     flex-direction: column;
     text-align: center;
-    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
   }
   
-  .benefitIcon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+  .clientLogo {
+    margin: 0 auto;
   }
   
-  .guaranteeContent {
-    flex-direction: column;
+  .additionalMetrics {
     padding: 1.5rem;
-    gap: 0.5rem;
+    gap: 1rem;
   }
   
-  .guaranteeIcon {
-    font-size: 2rem;
+  .metricValue {
+    font-size: 1.5rem;
+  }
+  
+  .testimonial {
+    padding: 1.5rem;
+  }
+  
+  .testimonial p {
+    font-size: 1rem;
+  }
+  
+  .processSteps {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .processTitle {
+    font-size: 1.6rem;
+  }
+  
+  .ctaButton {
+    width: 100%;
+    max-width: 300px;
+    padding: 1rem 2rem;
   }
 }
 
 @media (max-width: 480px) {
-  .calendly {
-    padding: 3rem 0;
+  .caseStudyCard {
+    padding: 1.5rem 1rem;
   }
   
-  .container {
-    padding: 0 1rem;
+  .caseStudyNumber {
+    font-size: 2.2rem;
   }
   
-  .mobileCalendlyWrapper {
-    padding: 0 0.5rem;
+  .metricLabel {
+    font-size: 1rem;
   }
-
-  .mobileCalendlyCard {
-    padding: 2rem 1.5rem;
-    margin: 0;
-    border-radius: 16px;
+  
+  .caseStudyTitle {
+    font-size: 1.3rem;
   }
-
-  .calendarIcon {
+  
+  .caseStudyDescription {
+    font-size: 1rem;
+  }
+  
+  .additionalMetrics {
+    padding: 1rem;
+  }
+  
+  .metricItem {
+    padding: 0.75rem;
+  }
+  
+  .metricValue {
+    font-size: 1.3rem;
+  }
+  
+  .metricText {
+    font-size: 0.8rem;
+  }
+  
+  .testimonial {
+    padding: 1rem;
+  }
+  
+  .testimonial::before {
     font-size: 3rem;
-    margin-bottom: 1.25rem;
+    top: -5px;
+    left: 15px;
   }
-
-  .mobileCalendlyTitle {
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
+  
+  .processStep {
+    padding: 1.5rem 1rem;
   }
-
-  .callDuration {
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-  }
-
-  .mobileCalendlyDescription {
-    font-size: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .feature {
-    font-size: 0.95rem;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-
-  .featureIcon {
-    font-size: 1.1rem;
-  }
-
-  .mobileCalendlyButton {
-    padding: 1.1rem 1.75rem;
-    font-size: 1rem;
-    min-height: 50px;
-  }
-
-  .mobileInfo {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-top: 1.25rem;
-    padding-top: 1.5rem;
-  }
-
-  .infoItem {
-    flex-direction: row;
-    justify-content: center;
-    gap: 0.75rem;
-  }
-
-  .infoIcon {
-    font-size: 1.2rem;
-    margin-bottom: 0;
-  }
-
-  .loadingFallback,
-  .errorFallback {
-    padding: 2rem 1rem;
-    min-height: 350px;
-  }
-
-  .loadingSpinner {
+  
+  .stepNumber {
     width: 40px;
     height: 40px;
-  }
-
-  .loadingFallback h3,
-  .errorFallback h3 {
     font-size: 1.2rem;
   }
-
-  .loadingFallback p,
-  .errorFallback p {
+  
+  .stepContent h4 {
     font-size: 1rem;
   }
-
-  .errorActions {
-    max-width: 100%;
+  
+  .stepContent p {
+    font-size: 0.85rem;
   }
-
-  .retryButton,
-  .fallbackButton {
+  
+  .ctaButton {
+    font-size: 1rem;
     padding: 1rem 1.5rem;
-    font-size: 0.95rem;
   }
 }
 
-/* =====================================================
-   LARGE DESKTOP
-   ===================================================== */
+/* Animation delays for staggered effects */
+.processStep:nth-child(1) { transition-delay: 0.1s; }
+.processStep:nth-child(2) { transition-delay: 0.2s; }
+.processStep:nth-child(3) { transition-delay: 0.3s; }
+.processStep:nth-child(4) { transition-delay: 0.4s; }
 
-@media (min-width: 1200px) {
-  .calendlyWidget {
-    max-width: 900px;
-    height: 750px;
-    padding: 2rem;
-  }
-  
-  .title {
-    font-size: 2.8rem;
-  }
-  
-  .subtitle {
-    font-size: 1.2rem;
-  }
-}
-
-/* =====================================================
-   ACCESSIBILITY & PERFORMANCE
-   ===================================================== */
-
-.mobileCalendlyButton:focus,
-.retryButton:focus,
-.fallbackButton:focus {
-  outline: 3px solid #F07255;
-  outline-offset: 2px;
-}
-
-/* High contrast mode */
+/* High contrast mode support */
 @media (prefers-contrast: high) {
-  .mobileCalendlyCard,
-  .calendlyWidget {
-    border-width: 3px;
-    border-color: #F07255;
+  .caseStudyCard,
+  .processStep,
+  .metricItem {
+    border: 2px solid var(--base);
   }
   
-  .mobileCalendlyButton {
-    border: 2px solid white;
+  .testimonial {
+    border: 2px solid var(--accent);
   }
 }
 
-/* Reduced motion */
+/* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .mobileCalendlyButton:hover,
-  .retryButton:hover,
-  .fallbackButton:hover,
-  .benefit:hover {
+  .caseStudyCard,
+  .processSection,
+  .processStep,
+  .metricItem {
+    transition: none;
     transform: none;
-  }
-  
-  .loadingSpinner {
-    animation: none;
-  }
-  
-  .fadeIn,
-  .fadeInUp {
-    animation: none;
     opacity: 1;
-    transform: none;
-  }
-}
-
-/* Touch optimization */
-@media (max-width: 768px) {
-  .mobileCalendlyButton {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    user-select: none;
-    touch-action: manipulation;
   }
   
-  .mobileCalendlyButton:active {
-    transform: scale(0.98);
+  .caseStudyNumber {
+    animation: none;
+  }
+  
+  .caseStudyCard:hover,
+  .processStep:hover,
+  .metricItem:hover,
+  .ctaButton:hover {
+    transform: none;
+  }
+  
+  .ctaButton::before {
+    display: none;
   }
 }
 
 /* Print styles */
 @media print {
-  .mobileCalendlyButton,
-  .retryButton,
-  .loadingSpinner,
-  .calendlyWidget {
+  .caseStudies {
+    background: white;
+  }
+  
+  .caseStudyCard {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .ctaButton {
     display: none;
   }
-  
-  .mobileCalendlyCard {
-    box-shadow: none;
-    border: 2px solid #ddd;
-  }
-  
-  .mobileCalendlyCard::after {
-    content: "Visit www.grovi.net to schedule your consultation";
-    display: block;
-    margin-top: 1rem;
-    font-weight: bold;
-    text-align: center;
-  }
-}
-/* Missing animation classes */
-.fadeIn {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.slideUp {
-  animation: slideUp 0.8s ease-out forwards;
-}
-
-.fadeInUp {
-  animation: fadeInUp 0.8s ease-out 0.3s forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Missing mobile card interaction */
-.active {
-  border-color: #F07255;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-}
-
-.mobileCard {
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.mobileCard:focus {
-  outline: 2px solid #F07255;
-  outline-offset: 2px;
-}
-
-/* Missing expand indicator */
-.expandIndicator {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #F07255;
-  min-width: 24px;
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-
-/* Missing tap hint */
-.tapHint {
-  text-align: center;
-  font-size: 0.75rem;
-  color: rgba(36, 36, 36, 0.5);
-  margin-top: 0.5rem;
-  font-style: italic;
-  opacity: 0.7;
 }

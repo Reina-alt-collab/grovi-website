@@ -1,72 +1,174 @@
-.contact {
-  background: #F8F5F1;
-  padding: 6rem 0;
-  position: relative;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 4rem;
-  opacity: 0;
-}
-
-.title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #242424;
-}
-
-.subtitle {
-  font-size: 1.1rem;
-  color: #242424;
-  opacity: 0.7;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
-.contentGrid {
+/* Contact Grid Layout */
+.contactGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: stretch; /* MAKES CARDS EQUAL HEIGHT */
+  align-items: stretch; /* Ensures equal height */
+  position: relative;
+  z-index: 2;
 }
 
-.formSection {
-  opacity: 0;
-}
-
-.formCard {
+/* Contact Form */
+.contactForm {
   background: white;
-  padding: 3rem 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(217, 166, 161, 0.2);
-  height: 100%; /* FILLS AVAILABLE HEIGHT */
+  padding: 3rem 2rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s ease;
+  border: 1px solid rgba(217, 166, 161, 0.1);
   display: flex;
   flex-direction: column;
+}
+
+.contactForm.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Contact Information */
+.contactInfo {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-medium);
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s ease;
+  border: 1px solid rgba(217, 166, 161, 0.1);
+  display: flex;
+  flex-direction: column;
+  /* Removed height: fit-content to allow equal heights */
+}
+
+.contactInfo.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Make contact items section grow to fill space */
+.contactItems {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  flex-grow: 1; /* Takes up available space */
+}
+
+/* Rest of your existing styles... */
+.contactSection {
+  background: var(--off-white);
+  position: relative;
+}
+
+.contactSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, transparent 30%, rgba(240, 114, 85, 0.02) 50%, transparent 70%);
+  pointer-events: none;
+}
+
+.sectionHeader {
+  position: relative;
+  z-index: 2;
 }
 
 .formTitle {
+  margin-bottom: 2rem;
+  color: var(--base);
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 2rem;
-  color: #242424;
   text-align: center;
+  position: relative;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  flex: 1; /* MAKES FORM EXPAND TO FILL AVAILABLE SPACE */
+.formTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  border-radius: 2px;
+}
+
+.formSuccess, .formError {
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.formSuccess {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.formError {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.formLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--base);
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.formInput, .formTextarea, .formSelect {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--beige);
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  background: var(--off-white);
+  transition: var(--transition);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.formInput:focus, .formTextarea:focus, .formSelect:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(240, 114, 85, 0.1);
+  transform: translateY(-1px);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.formSelect {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23242424' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 1rem center;
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  padding-right: 3rem;
+  cursor: pointer;
 }
 
 .formRow {
@@ -75,74 +177,29 @@
   gap: 1rem;
 }
 
-.formGroup {
-  display: flex;
-  flex-direction: column;
-}
-
-.label {
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #242424;
-  font-size: 0.9rem;
-}
-
-.input, .textarea, .select {
-  width: 100%;
-  padding: 1rem 1.25rem;
-  border: 2px solid #D6CDBF;
-  border-radius: 12px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  background: #F8F5F1;
-  transition: all 0.3s ease;
-  color: #242424;
-}
-
-.input:focus, .textarea:focus, .select:focus {
-  outline: none;
-  border-color: #F07255;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(240, 114, 85, 0.1);
-  transform: translateY(-1px);
-}
-
-.input::placeholder, .textarea::placeholder {
-  color: rgba(36, 36, 36, 0.5);
-}
-
-.textarea {
-  resize: vertical;
-  min-height: 120px;
-  line-height: 1.6;
-}
-
-.select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23242424' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-  background-position: right 1rem center;
-  background-repeat: no-repeat;
-  background-size: 1rem;
-  padding-right: 3rem;
-  cursor: pointer;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.inputError {
-  border-color: #dc3545 !important;
-  background: #fff5f5 !important;
+.formInput.error, .formTextarea.error, .formSelect.error {
+  border-color: #dc3545;
+  background: rgba(220, 53, 69, 0.05);
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
 }
 
 .fieldError {
   color: #dc3545;
   font-size: 0.8rem;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
-.submitButton {
-  background: linear-gradient(135deg, #F07255, #ff8066);
+.fieldError::before {
+  content: '⚠️';
+  font-size: 0.7rem;
+}
+
+.formSubmit {
+  background: linear-gradient(135deg, var(--accent), #ff8066);
   color: white;
   padding: 1rem 2rem;
   border: none;
@@ -150,33 +207,30 @@
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--transition);
   box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
+  width: 100%;
   font-family: 'Poppins', sans-serif;
-  margin-top: 1rem;
+  min-height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 56px;
+  margin-top: auto; /* Pushes button to bottom */
 }
 
-.submitButton:hover:not(:disabled) {
+.formSubmit:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(240, 114, 85, 0.4);
 }
 
-.submitButton:active {
-  transform: translateY(0);
-}
-
-.submitButton:disabled {
+.formSubmit:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
 }
 
-.spinner {
+.loadingSpinner {
   width: 20px;
   height: 20px;
   border: 2px solid transparent;
@@ -186,369 +240,142 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.successMessage, .errorMessage {
-  padding: 1.5rem;
-  border-radius: 12px;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.successMessage {
-  background: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
-}
-
-.errorMessage {
-  background: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
-}
-
-.successIcon, .errorIcon {
-  font-size: 1.5rem;
-}
-
-.successMessage strong, .errorMessage strong {
-  font-size: 1.1rem;
-}
-
-.successMessage p, .errorMessage p {
-  margin: 0;
-  opacity: 0.8;
-}
-
-.infoSection {
-  opacity: 0;
-}
-
-.infoCard {
-  background: white;
-  padding: 3rem 2.5rem;
-  border-radius: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(217, 166, 161, 0.2);
-  height: 100%; /* FILLS AVAILABLE HEIGHT */
-  display: flex;
-  flex-direction: column;
+  to { transform: rotate(360deg); }
 }
 
 .infoTitle {
+  margin-bottom: 2rem;
+  color: var(--base);
   font-size: 1.5rem;
   font-weight: 600;
-  margin-bottom: 2rem;
-  color: #242424;
   text-align: center;
+  position: relative;
 }
 
-.contactMethods {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-bottom: 2.5rem;
-  flex: 1; /* MAKES THIS SECTION EXPAND */
+.infoTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  border-radius: 2px;
 }
 
-.contactMethod {
+.contactItem {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  background: #F8F5F1;
-  border-radius: 15px;
-  transition: all 0.3s ease;
+  background: var(--off-white);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  border: 1px solid rgba(217, 166, 161, 0.1);
 }
 
-.contactMethod:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(217, 166, 161, 0.2);
+.contactItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(217, 166, 161, 0.2);
+  background: white;
+  border-color: var(--primary);
 }
 
-.methodIcon {
-  font-size: 2.5rem;
+.contactIcon {
+  font-size: 2rem;
+  color: var(--accent);
   flex-shrink: 0;
 }
 
-.methodContent {
-  flex: 1;
-}
-
-.methodContent h4 {
+.contactDetails h4 {
   font-weight: 600;
   margin-bottom: 0.25rem;
-  color: #242424;
+  color: var(--base);
   font-size: 1rem;
 }
 
+.contactDetails p {
+  opacity: 0.8;
+  color: var(--base);
+  font-size: 0.9rem;
+}
+
 .contactLink {
-  color: #F07255;
+  color: var(--accent);
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: var(--transition);
 }
 
 .contactLink:hover {
-  color: #e85a3f;
+  color: var(--base);
   text-decoration: underline;
 }
 
-.contactText {
-  color: #242424;
-  opacity: 0.7;
-  font-weight: 500;
-}
-
-.calendaryCta {
+.contactCta {
   text-align: center;
   padding: 2rem;
-  background: linear-gradient(135deg, #D9A6A1, #D6CDBF);
-  border-radius: 15px;
-  margin-top: 2rem;
+  background: linear-gradient(135deg, var(--off-white) 0%, rgba(217, 166, 161, 0.1) 100%);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(217, 166, 161, 0.2);
+  transition: var(--transition);
+  margin-top: auto; /* Pushes CTA to bottom */
 }
 
-.ctaTitle {
-  font-size: 1.2rem;
+.contactCta h4 {
+  margin-bottom: 1rem;
+  color: var(--base);
   font-weight: 600;
-  margin-bottom: 0.75rem;
-  color: #242424;
+  font-size: 1.1rem;
 }
 
-.ctaText {
-  color: #242424;
-  opacity: 0.8;
+.contactCta p {
   margin-bottom: 1.5rem;
+  opacity: 0.7;
+  font-size: 0.9rem;
   line-height: 1.5;
 }
 
 .ctaButton {
-  background: linear-gradient(135deg, #F07255, #ff8066);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, var(--accent), #ff8066);
   color: white;
-  padding: 0.875rem 1.75rem;
-  border: none;
+  text-decoration: none;
   border-radius: 50px;
   font-weight: 600;
-  font-size: 0.95rem;
+  transition: var(--transition);
+  box-shadow: 0 6px 20px rgba(240, 114, 85, 0.3);
+  border: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(240, 114, 85, 0.3);
   font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  min-height: 48px;
+  width: 100%;
+  max-width: 250px;
 }
 
 .ctaButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(240, 114, 85, 0.4);
-}
-
-/* Animations */
-.fadeIn {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-.fadeInLeft {
-  animation: fadeInLeft 0.8s ease-out 0.2s forwards;
-}
-
-.fadeInRight {
-  animation: fadeInRight 0.8s ease-out 0.4s forwards;
-}
-
-@keyframes fadeIn {
-  from { 
-    opacity: 0; 
-    transform: translateY(30px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-@keyframes fadeInLeft {
-  from { 
-    opacity: 0; 
-    transform: translateX(-30px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
-  }
-}
-
-@keyframes fadeInRight {
-  from { 
-    opacity: 0; 
-    transform: translateX(30px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateX(0); 
-  }
+  box-shadow: 0 8px 25px rgba(240, 114, 85, 0.4);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .contact {
-    padding: 4rem 0;
-  }
-
-  .contentGrid {
+  .contactGrid {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
   }
-
-  .formCard, .infoCard {
-    padding: 2rem 1.5rem;
-  }
-
+  
   .formRow {
     grid-template-columns: 1fr;
-    gap: 1rem;
   }
-
-  .contactMethod {
-    padding: 1rem;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-  }
-
-  .methodIcon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .calendaryCta {
-    padding: 1.5rem;
-  }
-
-  .title {
-    font-size: 2rem;
-  }
-
-  .subtitle {
-    font-size: 1rem;
-    padding: 0 1rem;
-  }
-
-  .formTitle, .infoTitle {
-    font-size: 1.3rem;
-  }
-
-  .container {
-    padding: 0 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .contact {
-    padding: 3rem 0;
-  }
-
-  .formCard, .infoCard {
-    padding: 1.5rem 1rem;
-  }
-
-  .input, .textarea, .select {
-    padding: 0.875rem 1rem;
-    font-size: 16px; /* Prevents zoom on iOS */
-    border-radius: 10px;
-  }
-
-  .submitButton {
-    padding: 1rem 1.5rem;
-    font-size: 1rem;
-    min-height: 48px;
-  }
-
-  .contactMethod {
-    padding: 1rem 0.75rem;
-  }
-
-  .methodContent h4 {
-    font-size: 0.95rem;
-  }
-
-  .calendaryCta {
-    padding: 1.25rem;
-  }
-
-  .ctaTitle {
-    font-size: 1.1rem;
-  }
-
-  .ctaText {
-    font-size: 0.9rem;
-  }
-
-  .methodIcon {
-    font-size: 1.8rem;
-  }
-}
-
-/* Focus states for accessibility */
-.input:focus-visible,
-.textarea:focus-visible,
-.select:focus-visible,
-.submitButton:focus-visible,
-.ctaButton:focus-visible {
-  outline: 2px solid #F07255;
-  outline-offset: 2px;
-}
-
-/* Hover states for better UX */
-.input:hover:not(:focus),
-.textarea:hover:not(:focus),
-.select:hover:not(:focus) {
-  border-color: #D9A6A1;
-  transform: translateY(-1px);
-}
-
-/* Loading state styling */
-.submitButton:disabled .spinner {
-  margin-right: 0.5rem;
-}
-
-/* Form validation visual feedback */
-.formGroup {
-  position: relative;
-}
-
-.input:valid:not(:placeholder-shown),
-.textarea:valid:not(:placeholder-shown),
-.select:valid {
-  border-color: #28a745;
-}
-
-/* Enhanced select dropdown styling */
-.select:hover {
-  background-color: white;
-}
-
-.select:focus {
-  background-color: white;
-}
-
-/* Success/Error message animations */
-.successMessage,
-.errorMessage {
-  animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .contactForm,
+  .contactInfo {
+    padding: 2rem 1.5rem;
   }
 }
