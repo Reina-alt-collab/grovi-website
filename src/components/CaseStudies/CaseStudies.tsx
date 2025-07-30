@@ -56,15 +56,17 @@ export default function CaseStudies({ onCTAClick }: CaseStudiesProps) {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true)
-          // Start counting animation after a small delay
-          setTimeout(() => setStartCounting(true), 500)
-        }
-      },
-      { threshold: 0.3 }
-    )
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      setIsInView(true)
+      setTimeout(() => setStartCounting(true), 500)
+    }
+  },
+  {
+    threshold: 0.1, // smaller threshold means easier to trigger
+    rootMargin: '0px 0px -10% 0px', // helps trigger earlier on mobile
+  }
+)
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current)
@@ -72,6 +74,17 @@ export default function CaseStudies({ onCTAClick }: CaseStudiesProps) {
 
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+  const timeout = setTimeout(() => {
+    if (!isInView && window.innerWidth < 768) {
+      setIsInView(true)
+      setStartCounting(true)
+    }
+  }, 2000)
+
+  return () => clearTimeout(timeout)
+}, [isInView])
 
   const handleCTAClick = () => {
     onCTAClick('descubre_como', 'case_studies')
