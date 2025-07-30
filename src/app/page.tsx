@@ -2,7 +2,7 @@
 
 import Hero from '@/components/sections/Hero'
 import About from '@/components/sections/About'
-import CaseStudies from '@/components/sections/CaseStudies'
+import CaseStudies from '@/components/CaseStudies/CaseStudies'
 import ContactForm from '@/components/sections/ContactForm'
 import Calendly from '@/components/sections/Calendly'
 import { trackFormSubmission, trackCTAClick } from '@/lib/analytics'
