@@ -35,30 +35,28 @@ export default function Calendly({ onCalendlyInteraction }: CalendlyProps) {
   }
 
   const initializeWidget = () => {
-    const widget = document.querySelector('.calendly-inline-widget')
-    if ((window as any).Calendly && widget) {
-      try {
-        (window as any).Calendly.initInlineWidget({
-          url: 'https://calendly.com/soporte-grovi/llamada-de-descubrimiento-de-15-minutos',
-          parentElement: widget
-        })
-      } catch (error) {
-        console.error('Error initializing Calendly:', error)
-      }
+  const widget = document.querySelector('.calendly-inline-widget')
+  if ((window as any).Calendly && widget) {
+    try {
+      (window as any).Calendly.initInlineWidget({
+        url: 'https://calendly.com/soporte-grovi/llamada-de-descubrimiento-de-15-minutos?hide_gdpr_banner=1&primary_color=ff735c',
+        parentElement: widget as HTMLElement
+      })
+    } catch (error) {
+      console.error('Error initializing Calendly:', error)
     }
   }
-
+}
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true)
-          loadCalendly()
-        }
-      },
-      { threshold: 0.2 }
-    )
-
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      setIsInView(true)
+      loadCalendly()
+    }
+  },
+  { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
+)
     const currentRef = sectionRef.current
     if (currentRef) {
       observer.observe(currentRef)
@@ -105,11 +103,12 @@ export default function Calendly({ onCalendlyInteraction }: CalendlyProps) {
                 <p>Cargando calendario...</p>
               </div>
             ) : (
+            
               <div className={styles.calendlyInline}>
                 <div 
-                  className="calendly-inline-widget" 
-                  data-url="https://calendly.com/soporte-grovi/llamada-de-descubrimiento-de-15-minutos"
-                  style={{ minWidth: '320px', height: '100%', backgroundColor: '#f0f0f0' }}
+                 className="calendly-inline-widget"
+                 data-url="https://calendly.com/soporte-grovi/llamada-de-descubrimiento-de-15-minutos?hide_gdpr_banner=1&primary_color=ff735c"
+                style={{ width: '100%', height: '100%' }}
                 />
               </div>
             )}

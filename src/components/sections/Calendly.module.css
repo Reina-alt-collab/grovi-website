@@ -38,7 +38,8 @@
 
 /* Calendly Widget */
 .calendlyWidget {
-  height: 500px;
+  height: 600px; /* ✅ fixed height */
+  min-height: 600px;
   background: var(--off-white);
   border-radius: var(--border-radius);
   padding: 1rem;
