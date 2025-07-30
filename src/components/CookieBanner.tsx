@@ -14,55 +14,71 @@ export default function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false)
 
   useEffect(() => {
-    // Check if user has already made a choice
-    const consent = localStorage.getItem('grovi-cookie-consent')
-    if (!consent) {
-      setShowBanner(true)
-    } else if (consent === 'accepted') {
-      // User previously accepted - grant consent
-      grantAnalyticsConsent()
-    }
-  }, [])
+  const consent = localStorage.getItem('grovi-cookie-consent')
+  console.log('[CookieBanner] Current consent:', consent) // 🔍 Debug
+
+  if (!consent) {
+    console.log('[CookieBanner] Showing banner...')
+    setShowBanner(true)
+  } else if (consent === 'accepted') {
+    console.log('[CookieBanner] Consent already accepted, applying...')
+    grantAnalyticsConsent()
+  }
+}, [])
 
   const grantAnalyticsConsent = () => {
-    // Check if gtag is available and is a function
-    if (typeof window !== 'undefined' && 
-        typeof window.gtag === 'function') {
-      try {
-        window.gtag('consent', 'update', {
-          'analytics_storage': 'granted',
-          'ad_storage': 'granted'
-        })
-      } catch (error) {
-        console.log('Analytics consent update failed:', error)
-      }
+  const updateConsent = () => {
+    try {
+      window.gtag('consent', 'update', {
+        'analytics_storage': 'granted',
+        'ad_storage': 'granted'
+      })
+
+    } catch (error) {
+      console.error('Analytics consent update failed:', error)
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    if (typeof window.gtag === 'function') {
+      updateConsent()
     } else {
-      // If gtag isn't ready yet, try again after a short delay
+      // Retry once after a short delay
       setTimeout(() => {
         if (typeof window.gtag === 'function') {
-          try {
-            window.gtag('consent', 'update', {
-              'analytics_storage': 'granted',
-              'ad_storage': 'granted'
-            })
-          } catch (error) {
-            console.log('Analytics consent update failed (delayed):', error)
-          }
+          updateConsent()
         }
       }, 1000)
     }
   }
+}
 
   const handleAccept = () => {
-    localStorage.setItem('grovi-cookie-consent', 'accepted')
-    grantAnalyticsConsent()
-    setShowBanner(false)
+  localStorage.setItem('grovi-cookie-consent', 'accepted')
+  grantAnalyticsConsent()
+  setShowBanner(false)
+
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', 'cookie_consent', {
+      event_category: 'consent',
+      event_label: 'accepted',
+      value: 1
+    })
   }
+}
 
   const handleDecline = () => {
-    localStorage.setItem('grovi-cookie-consent', 'declined')
-    setShowBanner(false)
+  localStorage.setItem('grovi-cookie-consent', 'declined')
+  setShowBanner(false)
+
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', 'cookie_consent', {
+      event_category: 'consent',
+      event_label: 'declined',
+      value: 0
+    })
   }
+}
 
   if (!showBanner) return null
 
