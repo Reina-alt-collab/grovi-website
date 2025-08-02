@@ -99,9 +99,7 @@ const structuredData = {
     "addressLocality": "Málaga",
     "addressCountry": "ES"
   },
-  "sameAs": [
-    "https://grovi.net"
-  ],
+  "sameAs": ["https://grovi.net"],
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+34695920917",
@@ -126,12 +124,10 @@ export default function RootLayout({
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
 
-        {/* GTM Head Snippet */}
+        {/* ✅ GTM HEAD snippet */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -140,11 +136,11 @@ export default function RootLayout({
               j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               'https://www.googletagmanager.com/gtm.js?id=GT-MJWHCS9D'+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GT-MJWHCS9D');
-            `,
+            `
           }}
         />
 
-        {/* Meta Tags */}
+        {/* Preconnects and Meta */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-touch-fullscreen" content="yes" />
@@ -152,8 +148,6 @@ export default function RootLayout({
         <meta name="application-name" content="Grovi" />
         <meta name="msapplication-TileColor" content="#F8F5F1" />
         <meta name="msapplication-TileImage" content="/Favicon G.png" />
-
-        {/* Preconnects */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://assets.calendly.com" />
@@ -161,7 +155,7 @@ export default function RootLayout({
       </head>
 
       <body className={poppins.className} suppressHydrationWarning={true}>
-        {/* GTM Body Snippet */}
+        {/* ✅ GTM Body NOSCRIPT */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GT-MJWHCS9D"
@@ -171,7 +165,6 @@ export default function RootLayout({
           ></iframe>
         </noscript>
 
-        {/* Skip to Main Content */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-accent text-white px-4 py-2 rounded-md z-50"
@@ -179,7 +172,6 @@ export default function RootLayout({
           Saltar al contenido principal
         </a>
 
-        {/* Site Layout */}
         <Navigation />
         <main id="main-content" role="main">{children}</main>
         <Footer />
