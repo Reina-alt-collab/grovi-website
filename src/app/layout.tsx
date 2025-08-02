@@ -12,7 +12,6 @@ const poppins = Poppins({
   display: 'swap',
 })
 
-// Viewport configuration (Next.js 15+)
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1.0,
@@ -28,8 +27,6 @@ export const metadata: Metadata = {
   keywords: 'soluciones empresariales, estrategias innovadoras, crecimiento empresarial, consultoría, Grovi, Málaga',
   authors: [{ name: 'Grovi' }],
   robots: 'index, follow',
-  
-  // Open Graph Meta Tags
   openGraph: {
     type: 'website',
     title: 'Grovi - Soluciones innovadoras para tu éxito',
@@ -46,8 +43,6 @@ export const metadata: Metadata = {
     siteName: 'Grovi',
     locale: 'es_ES',
   },
-  
-  // Twitter Card Meta Tags
   twitter: {
     card: 'summary_large_image',
     title: 'Grovi - Soluciones innovadoras para tu éxito',
@@ -56,19 +51,13 @@ export const metadata: Metadata = {
     site: '@grovi',
     creator: '@grovi',
   },
-  
-  // Apple Web App Meta Tags
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
   },
-  
-  // Additional Mobile Meta Tags
   formatDetection: {
     telephone: false,
   },
-  
-  // Icons
   icons: {
     icon: [
       { url: '/Favicon G.png', sizes: '32x32', type: 'image/png' },
@@ -95,7 +84,6 @@ export const metadata: Metadata = {
   },
 }
 
-// Structured Data for SEO
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -142,8 +130,21 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData),
           }}
         />
-        
-        {/* Additional Mobile Optimization */}
+
+        {/* GTM Head Snippet */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id=GT-MJWHCS9D'+dl;f.parentNode.insertBefore(j,f);
+              })(window,document,'script','dataLayer','GT-MJWHCS9D');
+            `,
+          }}
+        />
+
+        {/* Meta Tags */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-touch-fullscreen" content="yes" />
@@ -151,151 +152,39 @@ export default function RootLayout({
         <meta name="application-name" content="Grovi" />
         <meta name="msapplication-TileColor" content="#F8F5F1" />
         <meta name="msapplication-TileImage" content="/Favicon G.png" />
-        
-        {/* Preconnect to external domains for performance */}
+
+        {/* Preconnects */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://assets.calendly.com" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
-        
-        {/* DNS Prefetch */}
-        <link rel="dns-prefetch" href="https://calendly.com" />
-        <link rel="dns-prefetch" href="https://vitals.vercel-insights.com" />
-        
-        {/* GDPR Compliant Google Analytics with Consent Mode */}
-        <script 
-          async 
-          src="https://www.googletagmanager.com/gtag/js?id=G-RDMLRL7W3Z"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              
-              // Make gtag globally available
-              window.gtag = gtag;
-              
-              gtag('js', new Date());
-              
-              // Set default consent to 'denied' for GDPR compliance
-              gtag('consent', 'default', {
-                'analytics_storage': 'denied',
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied',
-                'personalization_storage': 'denied',
-                'functionality_storage': 'denied',
-                'security_storage': 'granted'
-              });
-              
-              gtag('config', 'G-RDMLRL7W3Z', {
-                page_title: document.title,
-                page_location: window.location.href,
-              });
-            `,
-          }}
-        />
-        
-        {/* Screen reader only utility styles */}
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            .sr-only {
-              position: absolute;
-              width: 1px;
-              height: 1px;
-              padding: 0;
-              margin: -1px;
-              overflow: hidden;
-              clip: rect(0, 0, 0, 0);
-              white-space: nowrap;
-              border: 0;
-            }
-            
-            .focus\\:not-sr-only:focus {
-              position: static;
-              width: auto;
-              height: auto;
-              padding: 0.5rem 1rem;
-              margin: 0;
-              overflow: visible;
-              clip: auto;
-              white-space: normal;
-            }
-          `
-        }} />
       </head>
+
       <body className={poppins.className} suppressHydrationWarning={true}>
-        {/* Skip to main content for accessibility */}
-        <a 
-          href="#main-content" 
+        {/* GTM Body Snippet */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GT-MJWHCS9D"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
+
+        {/* Skip to Main Content */}
+        <a
+          href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-accent text-white px-4 py-2 rounded-md z-50"
         >
           Saltar al contenido principal
         </a>
-        
-        {/* Navigation */}
+
+        {/* Site Layout */}
         <Navigation />
-        
-        {/* Main Content */}
-        <main id="main-content" role="main">
-          {children}
-        </main>
-        
-        {/* Footer */}
+        <main id="main-content" role="main">{children}</main>
         <Footer />
-        
-        {/* Cookie Banner for GDPR Compliance */}
         <CookieBanner />
-        
-        {/* Vercel Analytics */}
         <Analytics />
-        
-        {/* Performance and Error Monitoring */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Performance monitoring
-              if ('PerformanceObserver' in window) {
-                const observer = new PerformanceObserver((list) => {
-                  for (const entry of list.getEntries()) {
-                    if (entry.entryType === 'largest-contentful-paint') {
-                      gtag('event', 'LCP', {
-                        event_category: 'Web Vitals',
-                        value: Math.round(entry.startTime),
-                        non_interaction: true,
-                      });
-                    }
-                    if (entry.entryType === 'first-input') {
-                      gtag('event', 'FID', {
-                        event_category: 'Web Vitals',
-                        value: Math.round(entry.processingStart - entry.startTime),
-                        non_interaction: true,
-                      });
-                    }
-                  }
-                });
-                observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input'] });
-              }
-              
-              // Error tracking
-              window.addEventListener('error', (e) => {
-                gtag('event', 'exception', {
-                  description: e.error?.message || 'Unknown error',
-                  fatal: false,
-                });
-              });
-              
-              // Unhandled promise rejection tracking
-              window.addEventListener('unhandledrejection', (e) => {
-                gtag('event', 'exception', {
-                  description: e.reason?.message || 'Unhandled promise rejection',
-                  fatal: false,
-                });
-              });
-            `,
-          }}
-        />
       </body>
     </html>
   )
