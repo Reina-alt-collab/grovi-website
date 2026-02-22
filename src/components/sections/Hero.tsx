@@ -26,47 +26,45 @@ export default function Hero({ onCTAClick }: HeroProps) {
     <section className={styles.hero} id="hero">
       {/* Animated Background */}
       <div className={styles.heroBackground}></div>
-      
       <div className="container">
         <div className={styles.heroContainer}>
           {/* Hero Content */}
           <div className={`${styles.heroContent} ${isLoaded ? styles.slideInLeft : ''}`}>
             <h1 className={styles.heroTitle}>
-              Soluciones innovadoras para tu éxito 
+              Optimizo operaciones y flujos de e-commerce para generar resultados
             </h1>
             <p className={styles.heroSubtitle}>
-              Transformamos tu visión en resultados tangibles con estrategias innovadoras y 
-              soluciones personalizadas que impulsan el crecimiento de tu negocio.
+              Automatización inteligente, sistemas de ingresos y gestión operativa para tiendas Shopify y negocios digitales
             </p>
             <div className={styles.heroActions}>
-              <a 
-                href="#agendar" 
+              <a
+                href="#contacto"
                 className={`btn btn-primary ${styles.primaryButton}`}
                 onClick={handlePrimaryClick}
                 role="button"
-                aria-label="Agendar una llamada gratuita con Grovi"
+                aria-label="Agendar una llamada para conocer más sobre Andreina"
               >
-                Agendar Llamada
+                Trabajemos juntas
               </a>
-              <a 
-                href="#sobre-nosotros" 
+              <a
+                href="#sobre-mi"
                 className={`btn btn-secondary ${styles.secondaryButton}`}
                 onClick={handleSecondaryClick}
                 role="button"
-                aria-label="Conocer más sobre los servicios de Grovi"
+                aria-label="Conocer más sobre los servicios de Andreina"
               >
                 Conocer Más
               </a>
             </div>
           </div>
-          
+
           {/* Hero Visual */}
           <div className={`${styles.heroVisual} ${isLoaded ? styles.slideInRight : ''}`}>
-            <div className={styles.heroGraphic} role="img" aria-label="Gráfico representativo del crecimiento empresarial">
+            <div className={styles.heroGraphic} role="img" aria-label="Gráfico representativo de optimización de e-commerce">
               <div className={styles.heroGraphicInner}></div>
               <div className={styles.heroGraphicIcon}>📈</div>
             </div>
-            
+
             {/* Floating Elements */}
             <div className={styles.floatingElements}>
               <div className={`${styles.floatingElement} ${styles.element1}`}>💡</div>
@@ -76,33 +74,11 @@ export default function Hero({ onCTAClick }: HeroProps) {
           </div>
         </div>
       </div>
-      
+
       {/* Scroll Indicator */}
       <div className={styles.scrollIndicator} aria-hidden="true">
         <div className={styles.scrollArrow}></div>
       </div>
     </section>
   )
-}
-
-// Utility function for intersection observer (if needed separately)
-export function useIntersectionObserver(
-  ref: React.RefObject<Element>,
-  options: IntersectionObserverInit = {}
-) {
-  const [isIntersecting, setIsIntersecting] = useState(false)
-
-  useEffect(() => {
-    if (!ref.current) return
-
-    const observer = new IntersectionObserver(([entry]) => {
-      setIsIntersecting(entry.isIntersecting)
-    }, options)
-
-    observer.observe(ref.current)
-
-    return () => observer.disconnect()
-  }, [ref, options])
-
-  return isIntersecting
 }
